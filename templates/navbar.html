@@ -10,7 +10,7 @@
     <div class="flex items-center md:order-2">
         <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
           <span class="sr-only">Open user menu</span>
-          {% if request.user.is_authenticated %}
+          {% if request.user.is_authenticated and 'profile.png' not in request.user.userprofile.profile_pic.url %}
           <img src="{{request.user.userprofile.profile_pic.url}}" alt="" class="rounded-full w-10">
           {% else %}
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 rounded-full">
@@ -22,7 +22,11 @@
         <!-- Dropdown menu -->
         <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
           <div class="px-4 py-3">
+            {% if request.user.userprofile.first_name and request.user.userprofile.last_name %}
             <span class="block text-sm text-gray-900 dark:text-white">{{request.user.userprofile.first_name}} {{request.user.userprofile.last_name}}</span>
+            {% else %}
+            <span class="block text-sm text-gray-900 dark:text-white">{{request.user.username}}</span>
+            {% endif %}
             <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">{{request.user.email}}</span>
           </div>
           <ul class="py-2" aria-labelledby="user-menu-button">
@@ -30,7 +34,7 @@
               <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
             </li>
             <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
+              <a href="{% url 'menu' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
             </li>
             <li>
               <a href="{% url 'profile' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</a>

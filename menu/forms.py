@@ -10,6 +10,8 @@ class MenuItemForm(forms.ModelForm):
         self.fields['title'].widget.attrs.update({'placeholder':'Enter the Title', 'class':input_class})
         self.fields['description'].widget.attrs.update({'placeholder':'Describe the dish', 'class':input_class})
         self.fields['price'].widget.attrs.update({'placeholder':'Enter the price', 'class':input_class})
+        self.fields['category'].widget.attrs.update({'class':input_class})
+        self.fields['sub_category'].widget.attrs.update({'class':input_class})
         self.fields['is_non_veg'].widget.attrs.update({'class':input_class})
 
     class Meta:

@@ -27,10 +27,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+CHANNEL_LAYES = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    }
+}
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +46,7 @@ INSTALLED_APPS = [
     'homepage',
     'employee.apps.EmployeeConfig',
     'menu',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -72,6 +78,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'lounge.wsgi.application'
+ASGI_APPLICATION = 'lounge.asgi.application'
 
 
 # Database

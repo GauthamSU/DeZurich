@@ -1,5 +1,6 @@
-from pyscript import window, document, when
+from pyscript import window, when, display
 import js
+from js import document
 
 dark_icon = document.getElementById('theme-toggle-dark-icon')
 light_icon = document.getElementById('theme-toggle-light-icon')
@@ -35,4 +36,5 @@ def toggle_theme():
             document.documentElement.classList.add('dark')
             js.localStorage.setItem('color-theme', 'dark')
 
-signup_url = window.location.href
+complete_url = window.location.href
+

@@ -19,7 +19,7 @@
     {% compress css %}
     <link rel="stylesheet" href="{% static 'src/output.css' %}">
     {% endcompress %}
-    <script type="module" src="https://pyscript.net/snapshots/2023.09.1.RC2/core.js"></script>
+    <script type="module" src="https://pyscript.net/releases/2023.11.1/core.js"></script>
 
     <script>
     // On page load or when changing themes, best to add inline in `head` to avoid FOUC
@@ -31,7 +31,7 @@
     </script>
 </head>
 
-<body class="bg-gray-200 dark:bg-gray-700">
+<body class="bg-gray-50 dark:bg-black ">
 
     {% include 'navbar.html' %}
 
