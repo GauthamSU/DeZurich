@@ -36,5 +36,4 @@ def toggle_theme():
             document.documentElement.classList.add('dark')
             js.localStorage.setItem('color-theme', 'dark')
 
-complete_url = window.location.href
 
