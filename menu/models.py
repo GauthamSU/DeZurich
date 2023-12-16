@@ -22,3 +22,7 @@ class MenuItems(models.Model):
         # Generate the slug from the title before saving
         self.slug_title = slugify(self.title)
         super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = "Menu items"
+        verbose_name_plural = "Menu items"

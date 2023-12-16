@@ -25,7 +25,7 @@ urlpatterns = [
     path('', include('homepage.urls')),
     path('internal/', include('employee.urls')),
     path('internal/edit/', include('menu.urls')),
-    path('internal/order/', include('orders.urls')),
+    path('internal/order/', include('create_track_orders.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

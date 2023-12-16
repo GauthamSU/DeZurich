@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-CHANNEL_LAYES = {
+CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels.layers.InMemoryChannelLayer',
     }
@@ -42,11 +42,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'compressor',
     'homepage',
     'employee.apps.EmployeeConfig',
     'menu',
-    'orders',
+    'create_track_orders',
 ]
 
 MIDDLEWARE = [
@@ -116,7 +117,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
+# TIME_ZONE = 'UTC'
 
 USE_I18N = True
 

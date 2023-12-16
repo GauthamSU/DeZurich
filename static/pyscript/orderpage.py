@@ -15,6 +15,8 @@ def string_to_slug(input_string):
 pyodide_http.patch_all()
 
 data_dict = {}
+pref_dict = {}
+
 modal_html = """
 <li id="slugified_name">
     <div class="grid grid-cols-5 justify-between items-center w-full p-1 px-2 text-gray-900 bg-white border border-gray-200 rounded-lg dark:border-gray-500 dark:text-white dark:bg-gray-600">
@@ -49,7 +51,7 @@ def reduce(event):
             preference_input = ele.parentNode.parentNode.parentNode.parentNode.getElementsByClassName('preference_input')[0]
             if not 'hidden' in preference_input.classList:
                 preference_input.classList.add('hidden')
-    order_total(ele, quantity)
+        order_total(ele, quantity)
         
 
 @when('click', '.plus')
@@ -78,13 +80,13 @@ def change_disable():
         document.getElementById('popover-top').classList.add('hidden')
 
 
-
 @when('click', '#preview_button')
 def get_table_num():
     table_num = document.getElementById('table_number').value
     document.getElementById('modal_table_num').innerHTML = f"Table Number : {table_num}"
     amount_element = document.getElementById('total_amount').innerHTML
     document.getElementById('order_total').innerHTML = f"Order Total : {amount_element.split()[-1]}"
+    data_dict['Table Number'] = table_num
     
 
 @when('click', '#submit_botton')
@@ -112,6 +114,8 @@ def add_preference_to_modal(event):
     preference_target = document.getElementById(slugified_item).getElementsByClassName('preference_target')[0]
     preference_target.innerHTML = target_element.value
     preference_target.parentNode.classList.remove('hidden')
+    order_total(target_element,0, target_element.value)
+    #data_dict[target_title].append(target_element.value)
 
 
 @when('click', '.preference')
@@ -124,72 +128,81 @@ def show_preference_input(event):
         hidden_element.classList.add('hidden')
 
 
-def order_total(target_element, quantity):
-    parent =  target_element.parentNode.parentNode.parentNode
-    parent_id = parent.parentNode.parentNode.getAttribute('id')
-    if parent_id == 'food_items':
-        item_type = 'FOOD'
-        modal_id = 'food_list'
-        ordered_id = 'food_ordered'
-    elif parent_id == 'drinks_items':
-        item_type = 'DRINKS'
-        modal_id = 'drinks_list'
-        ordered_id = 'drinks_ordered'
-    else:
-        item_type = 'HOOKAH'
-        modal_id = 'hookah_list'
-        ordered_id = 'hookah_ordered'
-
-    order_item = parent.getElementsByClassName('menu-item')[0].textContent
-    slug_item_name = string_to_slug(order_item)
-    price = parent.getElementsByClassName('price')[0].textContent
-    total = round((quantity * float(price)), 2)
-    data_dict[order_item] = [quantity, float(price), total, item_type]
-    # data_dict[order_item] = {'quantity':quantity, 'price':float(price), 'Total':total, 'Type':item_type}
-    final_total = round(sum([val[2] for val in data_dict.values()]), 2)
-    final_quant = sum(quant[0] for quant in data_dict.values())
-    
-    final_items = document.getElementById('num_items')
-    final_items.textContent = f"Number of items ordered: {final_quant}"
-    
-    final_amount = document.getElementById('total_amount')
-    final_amount.textContent = f"Total Amount: {final_total}"
-    
-    order_item_li = document.getElementById(slug_item_name)
-    if not order_item_li:
-        if parent_id == 'food_items':       
-            food_ordered = document.getElementById(ordered_id)
-            if not food_ordered:
-                modal_type = modal_segregate.replace('modal_type', 'Food')
-                modal_type = modal_type.replace('ordered_id', ordered_id)
-                document.getElementById(modal_id).innerHTML += modal_type
+def order_total(target_element, quantity, preference=''):
+    if not preference:
+        parent =  target_element.parentNode.parentNode.parentNode
+        parent_id = parent.parentNode.parentNode.getAttribute('id')
+        if parent_id == 'food_items':
+            item_type = 'FOOD'
+            modal_id = 'food_list'
+            ordered_id = 'food_ordered'
         elif parent_id == 'drinks_items':
-            
-            drinks_ordered = document.getElementById(ordered_id)
-            if not drinks_ordered:
-                modal_type = modal_segregate.replace('modal_type', 'Drinks')
-                modal_type = modal_type.replace('ordered_id', ordered_id)
-                document.getElementById(modal_id).innerHTML += modal_type
+            item_type = 'DRINKS'
+            modal_id = 'drinks_list'
+            ordered_id = 'drinks_ordered'
         else:
-            
-            drinks_ordered = document.getElementById(ordered_id)
-            if not drinks_ordered:
-                modal_type = modal_segregate.replace('modal_type', 'Hookah')
-                modal_type = modal_type.replace('ordered_id', ordered_id)
-                document.getElementById(modal_id).innerHTML += modal_type
+            item_type = 'HOOKAH'
+            modal_id = 'hookah_list'
+            ordered_id = 'hookah_ordered'
 
-        render_html = modal_html.replace('item_name', order_item)
-        render_html = render_html.replace('slugified_name', slug_item_name)
-        render_html = render_html.replace('item_quantity', str(quantity))
-        render_html = render_html.replace('individual_item_price', str(price))
-        render_html = render_html.replace('total_item_price', str(total))
-        document.getElementById(modal_id).innerHTML += render_html
+        order_item = parent.getElementsByClassName('menu-item')[0].textContent
+        slug_item_name = string_to_slug(order_item)
+        price = parent.getElementsByClassName('price')[0].textContent
+        total = round((quantity * float(price)), 2)
+        if order_item in data_dict:
+            data_dict[order_item][0] = quantity
+            data_dict[order_item][2] = total
+        else:
+            data_dict[order_item] = [quantity, float(price), total, item_type, '']
+        # data_dict[order_item] = {'quantity':quantity, 'price':float(price), 'Total':total, 'Type':item_type}
+        final_total = round(sum([val[2] for val in data_dict.values()]), 2)
+        final_quant = sum(quant[0] for quant in data_dict.values())
+        final_items = document.getElementById('num_items')
+        final_items.textContent = f"Number of items ordered: {final_quant}"
+        
+        final_amount = document.getElementById('total_amount')
+        final_amount.textContent = f"Total Amount: {final_total}"
+        
+        order_item_li = document.getElementById(slug_item_name)
+        if not order_item_li:
+            if parent_id == 'food_items':       
+                food_ordered = document.getElementById(ordered_id)
+                if not food_ordered:
+                    modal_type = modal_segregate.replace('modal_type', 'Food')
+                    modal_type = modal_type.replace('ordered_id', ordered_id)
+                    document.getElementById(modal_id).innerHTML += modal_type
+            elif parent_id == 'drinks_items':
+                
+                drinks_ordered = document.getElementById(ordered_id)
+                if not drinks_ordered:
+                    modal_type = modal_segregate.replace('modal_type', 'Drinks')
+                    modal_type = modal_type.replace('ordered_id', ordered_id)
+                    document.getElementById(modal_id).innerHTML += modal_type
+            else:
+                
+                drinks_ordered = document.getElementById(ordered_id)
+                if not drinks_ordered:
+                    modal_type = modal_segregate.replace('modal_type', 'Hookah')
+                    modal_type = modal_type.replace('ordered_id', ordered_id)
+                    document.getElementById(modal_id).innerHTML += modal_type
+
+            render_html = modal_html.replace('item_name', order_item)
+            render_html = render_html.replace('slugified_name', slug_item_name)
+            render_html = render_html.replace('item_quantity', str(quantity))
+            render_html = render_html.replace('individual_item_price', str(price))
+            render_html = render_html.replace('total_item_price', str(total))
+            document.getElementById(modal_id).innerHTML += render_html
+        else:
+            if quantity == 0:
+                order_item_li.remove()
+            else:
+                paras = order_item_li.getElementsByTagName('p')
+                if order_item in paras[0].textContent:
+                    paras[1].textContent = quantity
+                    paras[-1].textContent = total
+
     else:
-        if quantity == 0:
-            order_item_li.remove()
-        else:
-            paras = order_item_li.getElementsByTagName('p')
-            if order_item in paras[0].textContent:
-                paras[1].textContent = quantity
-                paras[-1].textContent = total
-
+        order_item = target_element.parentNode.parentNode.getElementsByClassName('menu-item')[0].textContent
+        pref = target_element.value
+        data_dict[order_item][4] = pref
+    
