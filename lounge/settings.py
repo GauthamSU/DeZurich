@@ -44,10 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'compressor',
+    'custom_template_filters',
     'homepage',
     'employee.apps.EmployeeConfig',
     'menu',
     'create_track_orders',
+    'workspace',
 ]
 
 MIDDLEWARE = [

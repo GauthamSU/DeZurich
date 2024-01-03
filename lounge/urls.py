@@ -24,8 +24,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('homepage.urls')),
     path('internal/', include('employee.urls')),
-    path('internal/edit/', include('menu.urls')),
+    path('internal/menu/', include('menu.urls')),
     path('internal/order/', include('create_track_orders.urls')),
+    path('internal/workspace/', include('workspace.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

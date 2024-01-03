@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load add_class %}
+
+{% block content %}
+
+<h3 class="text-3xl text-center my-4 dark:text-white">All Menu Items</h3>
+<form method="post">
+{% csrf_token %}
+{{ formset.management_form }}
+    <div class="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-2 mx-2 lg:mx-4 dark:text-white max-w-full ">
+    {% for item, form in context_data %}
+        <div class="flex justify-between px-4 py-2 border rounded-md shadow-xl dark:shadow-gray-700 text-[8px] lg:text-sm mb-6" id="raw-{{item.slug_title}}">
+            <div class="m-0">
+                <div>
+                    <p class="text-center text-[10px] lg:text-base item-title">{{item.title}}</p>
+                </div>
+                <div class="text-center">
+                    <a href="{{item.dish_image.url}}" target="_blank">
+                        <img class="p-2 rounded-t-lg w-20 lg:w-40 h-20 lg:h-40 object-cover inline-block item-dish-image" src="{{item.dish_image.url}}" alt="product image" />
+                    </a>
+                </div>
+                <div class="overflow-y-scroll">
+                    <p class="h-18 lg:h-24 w-full item-description">{{item.description}} {{item.description}}</p>
+                </div>
+                <div class="flex justify-between  border-t pt-2 mt-2 w-full font-medium">
+                    <div>
+                        <p>Price </p>
+                        <p>Category </p>
+                        <p>Sub Category </p>
+                        <p>Is Non-veg </p>
+                    </div>
+                    <div>
+                        <p>:</p>
+                        <p>:</p>
+                        <p>:</p>
+                        <p>:</p>
+                    </div>
+                    <div>
+                        <p class="item-price">{{item.price}}</p>
+                        <p class="item-category">{{item.category}}</p>
+                        <p class="item-sub-category">{{item.sub_category}}</p>
+                        <p class="item-is-non-veg">{{item.is_non_veg}}</p>
+                    </div>
+                </div>
+                <div class="pt-4 text-center">
+                    <div class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-[8px] lg:text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800 cursor-pointer">
+                        <span class="relative px-5 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 edit-button" id="button-{{item.slug_title}}">
+                        Edit Details
+                        </span>
+                    </div>
+                    <div class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-[8px] lg:text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800 cursor-pointer">
+                        <span class="relative px-5 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 edit-button" id="button-{{item.slug_title}}">
+                        Remove
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden w-full">
+            {{ form.media }}
+                <div class="mx-2 items-center w-full">
+                    {{form.title|add_class:"text-center text-[10px] lg:text-base rounded-md py-1 w-full title"}}
+                </div>
+                <div class="text-center">
+                    <img class="p-2 rounded-t-lg w-20 lg:w-40 h-20 lg:h-40 object-cover inline-block" src="{{form.instance.dish_image.url}}" alt="product image" />
+                    {{form.dish_image|add_class:"text-[8px] lg:text-sm w-full text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dish-image"}}
+                </div>
+                <div class="text-[8px] lg:text-sm mt-1">
+                    {{form.description|add_class:"h-12 w-full lg:h-24 text-[8px] lg:text-sm description"}}
+                </div>
+                <div class="flex-col justify-center border-t-4 pt-2 mt-2 font-medium text-[8px] lg:text-sm w-full">
+                    <div class="grid grid-cols-9 justify-between text-[8px] lg:text-xs items-center">
+                        <p class="col-span-3 text-xs">Price </p>
+                        <p class="col-span-1 text-center mt-1">:</p>
+                        {{form.price|add_class:"rounded-md text-[8px] lg:text-xs my-1 col-span-5 w-auto price"}}
+                        <p class="col-span-3 text-xs">Category </p>
+                        <p class="col-span-1 text-center mt-1">:</p>
+                        {{form.category|add_class:"rounded-md text-[8px] lg:text-xs col-span-5 mb-1 w-auto category"}}
+                        <p class="col-span-3 text-xs">Sub Category </p>
+                        <p class="col-span-1 text-center mt-1">:</p>
+                        {{form.sub_category|add_class:"rounded-md text-[8px] lg:text-xs col-span-5 mb-1 w-auto sub-category"}}
+                        <p class="col-span-3 text-xs ">Is Non-veg </p>
+                        <p class="col-span-1 text-center mt-1">:</p>
+                        {{form.is_non_veg|add_class:"rounded-md text-[8px] lg:text-xs col-span-5 mb-1 w-auto is-non-veg"}}
+                        <p class="hidden">col-span-5</p>
+                    </div>
+                </div>
+                <div class="pt-4 text-center">
+                    <div class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-[8px] lg:text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800 cursor-pointer">
+                        <span class="relative px-5 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 back" id="back-{{item.slug_title}}">
+                        Back
+                        </span>
+                    </div>
+                    <div class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-[8px] lg:text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800 cursor-pointer">
+                        <span class="relative px-5 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 save" id="save-{{item.slug_title}}">
+                        Save
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    {% endfor %}
+    </div>
+</form>
+
+<script type="py" src="{% static 'pyscript/menu_edit_websocket.py' %}"></script>
+
+{% endblock %}

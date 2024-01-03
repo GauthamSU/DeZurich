@@ -3,6 +3,7 @@ import string
 from django.db import models
 from menu.models import MenuItems
 from employee.models import UserProfile
+from django.utils import timezone
 
 
 
@@ -29,6 +30,12 @@ class OrderDetails(models.Model):
 
     def __str__(self):
         return f"{self.order_id} - {self.employee.user.username}"
+
+
+    def save(self, *args, **kwargs):
+        if self.order_status == 'order_completed':
+            self.order_completed = timezone.now()
+        super().save(*args, **kwargs)
 
 
     class Meta:

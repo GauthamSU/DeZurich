@@ -35,7 +35,7 @@ def initiate_order(request):
 
 def track_order(request):
     data = messages.get_messages(request)
-    recent_order = OrderDetails.objects.exclude(order_status='order_paid')
+    recent_order = OrderDetails.objects.exclude(order_status__in=['order_paid', 'order_completed'])
     message = ''
     if data:
         for d in data:
