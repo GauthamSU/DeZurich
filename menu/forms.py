@@ -38,3 +38,8 @@ class EditMenuItemForm(forms.ModelForm):
             'description':Textarea(attrs={'placeholder':'Describe the dish', 'class':"h-12 w-full lg:h-24 text-[8px] lg:text-sm"})
         }
 
+
+class MenuFilterForm(forms.ModelForm):
+    class Meta:
+        model = MenuItems
+        fields = ('category', 'sub_category')

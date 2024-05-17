@@ -42,8 +42,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_flatpickr',
     'rest_framework',
+    'widget_tweaks',
     'compressor',
+    'django_filters',
+    'django_extensions',
+    'plotly',
+        
     'custom_template_filters',
     'homepage',
     'employee.apps.EmployeeConfig',
@@ -152,3 +158,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = 'images/'
 
 MEDIA_ROOT = BASE_DIR/'static/images/'
+
+DJANGO_FLATPICKR = {"theme_name": "dark"}

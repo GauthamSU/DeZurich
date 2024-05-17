@@ -1,5 +1,6 @@
+from collections.abc import Iterable
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 
 state_choices = (
@@ -42,8 +43,11 @@ state_choices = (
 )
 
 gender_choices = (('Male','Male'), ('Female', 'Female'), ('DNS', 'Do not want to specify'))
+ 
+leave_choices = (('Sick', 'Sick'), ('Casual', 'Casual'), ('Closed', 'Closed'))
 
-# Create your models here.
+# group_choices = (('Kitchen', 'Kitchen'), ('Floor', 'Floor'), ('Admin', 'Admin'))
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=50, blank=True, null=True)
@@ -55,6 +59,7 @@ class UserProfile(models.Model):
     state = models.CharField(choices=state_choices, default='Karnataka', max_length=50)
     gender = models.CharField(choices=gender_choices, max_length=50, blank=True, null=True)
     zipcode = models.IntegerField(blank=True, null=True)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, blank=True, null=True)
 
 
     @property
@@ -65,3 +70,22 @@ class UserProfile(models.Model):
     
     def __str__(self):
         return f"{self.user.username}"
+    
+
+
+class EmployeeLeave(models.Model):
+    employee = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True, blank=True)
+    leave_type = models.CharField(max_length=10, blank=True, null=True, choices=leave_choices)
+    leave_details = models.TextField(max_length=100, blank=True, null=True)
+    leave_start_date = models.DateField()
+    leave_end_date = models.DateField()
+    is_approved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.employee} - {self.leave_type} Leave"
+    
+    def date_difference(self):
+        return self.leave_end_date - self.leave_start_date
+    
+    class Meta:
+        ordering = ('leave_start_date',)
