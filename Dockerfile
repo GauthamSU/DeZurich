@@ -1,20 +1,17 @@
 FROM python:3.10  
 
-WORKDIR /app
+WORKDIR /lounge-app
 
-COPY requirements.txt .
+COPY requirements.txt /lounge-app
 RUN pip install -r requirements.txt
 
 # Install Node.js and npm for TailwindCSS
-RUN apt-get update && apt-get install -y --no-install-recommends nodejs
+RUN apt-get update && apt-get install -y --no-install-recommends nodejs npm
 
-COPY . .
+COPY . /lounge-app
 
 # Install Tailwind dependencies
 RUN npm install
-
-# Collect static files (includes compiled Tailwind CSS)
-RUN collectstatic --no-input
 
 EXPOSE 8000  
 

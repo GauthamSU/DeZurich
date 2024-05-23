@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lounge-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: lounge-app
+  template:
+    metadata:
+      labels:
+        app: lounge-app
+    spec:
+      containers:
+      - name: lounge-app
+        image: asia-south1-docker.pkg.dev/dezurich-lounge/dezurich-docker-repository/lounge:1.0  # Replace with your image name
+        ports:
+        - containerPort: 8000
+      #   envFrom:
+      #   - configMapRef:
+      #     name: django-config  # Reference to ConfigMap
+      #   volumeMounts:
+      #   - name: static-volume
+      #     mountPath: /code/static  # Adjust path if needed
+      #   - name: media-volume  # Optional, for user uploaded files
+      #     mountPath: /code/media  # Adjust path if needed
+      # volumes:
+      # - name: static-volume
+      #   emptyDir: {}  # Adjust if using persistent storage
+      # - name: media-volume  # Optional, adjust if using persistent storage
