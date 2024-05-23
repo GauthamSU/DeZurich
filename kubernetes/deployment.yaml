@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: lounge-app
-        image: asia-south1-docker.pkg.dev/dezurich-lounge/dezurich-docker-repository/lounge:1.0  # Replace with your image name
+        image: asia-south1-docker.pkg.dev/dezurich-lounge/dezurich-docker-repository/lounge:1.1  # Replace with your image name
         ports:
         - containerPort: 8000
       #   envFrom:
