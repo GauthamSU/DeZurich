@@ -14,18 +14,55 @@ spec:
     spec:
       containers:
       - name: lounge-app
-        image: asia-south1-docker.pkg.dev/dezurich-lounge/dezurich-docker-repository/lounge:1.1  # Replace with your image name
+        image: asia-south1-docker.pkg.dev/dezurich-lounge/lounge-docker-images/lounge:v1
+        # resources:
+        #   limits:
+        #     cpu: "100m"  # Limit CPU usage to 100 millicores
+        #     memory: "0.5Gi"  # Limit memory usage to 2 Gigabytes
+        imagePullPolicy: Always
+        envFrom:
+          - secretRef:
+              name: postgres-credentials
+          - secretRef:
+              name: cloudsql-oauth-credentials
+          - configMapRef:
+              name: django-config
+        volumeMounts:
+          - name: cloudsql-oauth-credentials
+            mountPath: /secrets/cloudsql
+            readOnly: true
         ports:
         - containerPort: 8000
-      #   envFrom:
-      #   - configMapRef:
-      #     name: django-config  # Reference to ConfigMap
-      #   volumeMounts:
-      #   - name: static-volume
-      #     mountPath: /code/static  # Adjust path if needed
-      #   - name: media-volume  # Optional, for user uploaded files
-      #     mountPath: /code/media  # Adjust path if needed
-      # volumes:
-      # - name: static-volume
-      #   emptyDir: {}  # Adjust if using persistent storage
-      # - name: media-volume  # Optional, adjust if using persistent storage
+          name: gunicorn
+          
+      # [START proxy_container]
+      - image: gcr.io/cloudsql-docker/gce-proxy:1.16
+        name: cloudsql-proxy
+        command: ["/cloud_sql_proxy", "--dir=/cloudsql",
+                  "-instances=dezurich-lounge:asia-south1:lounge-database=tcp:5432",
+                  "-credential_file=/secrets/cloudsql/credentials.json"]
+        # resources:
+        #   limits:
+        #     cpu: "100m"  # Limit CPU usage to 100 millicores
+        #     memory: "0.5Gi"  # Limit memory usage to 2 Gigabytes
+        volumeMounts:
+          - name: cloudsql-oauth-credentials
+            mountPath: /secrets/cloudsql
+            readOnly: true
+          - name: ssl-certs
+            mountPath: /etc/ssl/certs
+          - name: postgres-credentials
+            mountPath: /cloudsql
+      # [END proxy_container] 
+      # [START volumes]
+      volumes:
+        - name: cloudsql-oauth-credentials
+          secret:
+            secretName: cloudsql-oauth-credentials
+        - name: ssl-certs
+          hostPath:
+            path: /etc/ssl/certs
+        - name: postgres-credentials
+          emptyDir: {}
+      # [END volumes]        
+# [END kubernetes_deployment]

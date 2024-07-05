@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: django-config
-data:
-  ALLOWED_HOSTS: "*"  # Adjust as needed
-  # Add other environment variables for your Django project here
-  DATABASE_URL: "postgres://postgres:password@postgres-service:5432/your_database"  # Replace with connection details

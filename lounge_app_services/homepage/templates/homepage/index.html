@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% load partials %}
+
+{% block content %}
+
+<div id="homepage-content">
+    {% with partial_html_file="homepage/homepage_partials/" %}
+
+        {% include partial_html_file|add:"hero_carousel_partial.html#carousel" %}
+
+        <div class="w-full ">
+            {% include partial_html_file|add:"section_partials.html#section1"%}
+            {% include partial_html_file|add:"section_partials.html#section2"%}
+            {% include partial_html_file|add:"section_partials.html#section3"%}
+            {% include partial_html_file|add:"section_partials.html#section4"%}
+        </div>
+
+    {% endwith %}
+</div>
+
+<script type="py" src="{% static 'pyscript/homepage.py' %}"></script>
+{% endblock content %}

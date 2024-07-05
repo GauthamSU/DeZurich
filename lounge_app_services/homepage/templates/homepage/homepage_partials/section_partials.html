@@ -1,0 +1,95 @@
+{% load partials %}
+
+{% load static %}
+
+{% partialdef section1 %}
+
+    <section class="flex flex-col md:flex-row gap-4 md:gap-0 justify-between mt-4 mx-2 dark:text-white" id="section-1">
+        <img src="{% static 'images/Dezurich1.jpg' %}" alt="" class="h-[320px] md:h-[600px] w-[800px]">
+        <div class="mx-6 flex flex-col gap-2 justify-evenly items-center">
+            <h1 class="text-base md:text-2xl text-center font-bold font-marko border-solid border-[5px] p-2 my-20 w-[400px] md:w-[600px] dark:border-dark">
+                DISCOVER THE ART OF FLAVOURS AT DEZURICH LOUNGE
+            </h1>
+            <div class="text-xl md:text-3xl font-caveat font-bold px-2 md:px-10">
+                The lounge that proclaims style and elegance, created to render a marvelous experience just for you.
+                Endure the warm and splendid ambiance that welcomes you along with our courteous and attentive team.
+                We take care of your smallest requirements by paying attention to every single detail which makes a big difference!
+                We inspire an unforgettable experience with every dish crafted by our finest chefs creating magic for your taste buds, bringing soul to every recipe.
+            </div>
+            <div class="text-xs md:text-base font-bold font-marko my-4">
+                * WE SERVE JOY AND HAPPINESS COMPLIMENTARY *
+            </div>
+        </div>
+    </section>
+
+{% endpartialdef %}
+
+{% partialdef section2 %}
+
+    <section class="flex flex-col-reverse md:flex-row gap-4 md:gap-0 justify-between mt-4 md:mt-10 mx-2 dark:text-white" id="section-2">
+        <div class="mx-6 flex flex-col gap-2 justify-evenly items-center">
+            <h1 class="text-base md:text-2xl text-center font-bold font-marko border-solid border-[5px] p-2 my-20 dark:border-dark">
+                ABOUT US
+            </h1>
+            <div class="text-xl md:text-3xl font-caveat font-bold px-2 md:px-10">
+                Dezurich is a passion project which was born out of the idea of amalgamation of ancient hookah with modern food and ambience.
+                We are a 1 year old lounge who want to provide great food, great service and great experience.
+                We undertake bookings for private parties as well and are very much willing to be involved in preparation for party, if need be.
+            </div>
+            <div class="text-xs md:text-base font-bold font-marko my-4">
+               * PRIVATE PARTIES UNDERTAKEN *
+            </div>
+        </div>
+        <img src="{% static 'images/Dezurich2.jpg' %}" alt="" class="h-[320px] md:h-[600px] w-[800px]">
+    </section>
+
+{% endpartialdef %}
+
+{% partialdef section3 %}
+
+    <section class="flex flex-col md:flex-row gap-4 md:gap-0 justify-between mt-4 mx-2 dark:text-white" id="section-3">
+        <img src="{% static 'images/Dezurich3.jpg' %}" alt="" class="h-[320px] md:h-[500px] w-[600px]">
+        <div class="mx-6 flex flex-col gap-2 justify-evenly items-center">
+            <h1 class="text-base md:text-2xl text-center font-bold font-marko border-solid border-[5px] p-2 my-20 dark:border-dark">
+                EXPLORE OUR FOOD/HOOKAH MENU 
+            </h1>
+            <div class="text-xl md:text-3xl font-caveat font-bold px-2 md:px-10">
+                Explore wide variety of food ranging from salad/fries/burgers/pizza to grill chicken and more.
+                Do not missout on various cold and hot beverage delights at offer and a special dessert to end your meal alongside your choice of hookah.  
+            </div>
+            <button 
+                class="relative inline-flex items-center justify-center mt-4 p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
+                hx-get="{% url 'menu' %}"
+                hx-target="#homepage-content"
+                hx-select="#consumer-menu-page"
+                hx-push-url="true"
+            >
+                <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                    Explore Menu
+                </span>
+            </button>
+        </div>
+    </section>
+
+{% endpartialdef %}
+
+{% partialdef section4 %}
+
+    <section class="flex flex-col md:flex-row gap-4 md:gap-0 justify-between mt-4 mb-10 mx-2 dark:text-white" id="section-4">
+        <div class="mx-6 flex flex-col gap-2 justify-evenly items-center">
+            <h1 class="text-base md:text-2xl text-center font-bold font-marko border-solid border-[5px] p-2 my-20 dark:border-dark">
+                LOCATION AND CONTACTS
+            </h1>
+            <div class="text-xl md:text-3xl font-caveat font-bold px-2 md:px-10">
+                We are located at 2116, CMR Main Rd, 4th CROSS, HRBR Layout 2nd Block, HRBR Layout, Kalyan Nagar, Bengaluru, Karnataka 560043.
+                We are open everyday from 12pm to 12am and will extend our working hours to 2am on Friday, Saturday and Sunday.
+                You can contact us at +91-8970094449 or email us at dezurichlounge@gmail.com 
+            </div>
+        </div>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.2095817459535!2d77.6373518757561!3d13.022321613762834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1754f53cc8fd%3A0x5c1901dfe8775d92!2sDe%20Zurich%20Lounge!5e0!3m2!1sen!2sin!4v1719324318992!5m2!1sen!2sin"
+            width="600" height="450" style="border:0;" class="w-full"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </section>
+
+{% endpartialdef %}

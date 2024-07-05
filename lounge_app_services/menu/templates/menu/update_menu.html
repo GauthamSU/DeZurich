@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% load partials %}
+
+{% block content %}
+
+<head>
+{{filter_form.media.css}}
+</head>
+
+<div id="menu-edit-filter-page">
+
+
+    <a 
+        href="{% url 'menu-add' %}" 
+        class="block absolute my-4  right-1 text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-xs md:text-sm px-2 md:px-5 py-2.5 text-center me-2 mb-2 dark:border-yellow-300 dark:text-yellow-300 dark:hover:text-white dark:hover:bg-yellow-400 dark:focus:ring-yellow-900"
+        hx-boost="true"
+        hx-target="#menu-edit-filter-page"
+        hx-select="#menu-input-page"
+        hx-push-url="true"
+        >
+        Add items to Menu
+    </a>
+
+    <h3 class="text-xl md:text-3xl text-center my-4 py-2 md:mx-96 rounded-md bg-slate-100 dark:bg-slate-800 dark:text-white">All Menu Items</h3>
+
+    {% with partial_html_file='menu/menu_partials/menu_filter_partial.html' %}
+        
+        <form class="mb-2 mx-6" hx-get="{% url 'menu-edit' %}" hx-target="body">
+            
+            {% include partial_html_file|add:"#filter-form" %}
+
+            <div class="text-center mt-2">
+                <button type="submit" 
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
+                    Submit
+                </button>
+                <button 
+                    type="button" 
+                    class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                    hx-get="{% url 'menu-edit' %}" hx-trigger="click"
+                >
+                    Clear
+                </button>
+            </div>
+        </form>
+
+        <form method="post" id="filtered-data">
+        {% csrf_token %}
+        {{ formset.management_form }}
+            <div class="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-7 gap-2 mx-2 lg:mx-4 dark:text-white max-w-full ">
+            {% for item, form in context_data %}
+                <div class="flex justify-between px-4 py-2 border rounded-md shadow-xl dark:shadow-gray-700 text-[8px] lg:text-sm mb-6" id="raw-{{item.slug_title}}">
+                    
+                    {% include partial_html_file|add:"#item-card-view" %}
+
+                    {% include partial_html_file|add:"#item-edit-form" %}
+
+                </div>
+                
+
+            {% endfor %}
+            </div>
+        </form>
+
+        {% include partial_html_file|add:"#hidden-subcats" %}
+
+    {% endwith %}
+
+    <script type="py" src="{% static 'pyscript/menu_edit.py' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    {{ filter_form.media.js }}
+
+</div>
+{% endblock %}

@@ -1,0 +1,8 @@
+[
+    {
+      "origin": ["https://dezurich.gauthamupadhyaya.in"],
+      "method": ["GET"],
+      "responseHeader": ["Content-Type"],
+      "maxAgeSeconds": 3600
+    }
+]

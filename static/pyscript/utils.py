@@ -12,7 +12,7 @@ if js.localStorage.getItem('color-theme'):
         dark_icon.classList.remove('hidden')
 else:
     if window.matchMedia('(prefers-color-scheme: dark)').matches:
-         light_icon.classList.remove('hidden')
+        light_icon.classList.remove('hidden')
     else:
         dark_icon.classList.remove('hidden')
 
@@ -35,5 +35,6 @@ def toggle_theme():
         else:
             document.documentElement.classList.add('dark')
             js.localStorage.setItem('color-theme', 'dark')
+            
 
 

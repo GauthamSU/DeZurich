@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: django-config
+data:
+  ALLOWED_HOSTS: "*"  # Adjust as needed
+  DEBUG: "True"
+  # Add other environment variables for your Django project here
+  SECRET_KEY: django-insecure-u2q!taesb4($vpxe=k%#sq^jocx(v=fpi!ktyicq61!mhwb+qu
+  GS_CREDENTIALS_PATH: /secrets/cloudsql/credentials.json
+  GS_STATIC_BUCKET_NAME: lounge-static-bucket
+  GS_MEDIA_BUCKET_NAME: lounge-media-bucket
+  GS_PROJECT_ID: dezurich-lounge
+  MEDIA_URL: "http://storage.googleapis.com/lounge-media-bucket/"
+  MEDIA_ROOT: "http://storage.googleapis.com/lounge-media-bucket/"
+  STATIC_URL: "http://storage.googleapis.com/lounge-static-bucket/"

@@ -1,0 +1,162 @@
+
+{% load static %}
+
+{% load partials %}
+
+{% load widget_tweaks %}
+
+{% partialdef toggle-button %}
+
+    <label class="inline-flex items-center me-1 lg:me-5 cursor-pointer col-span-5 mb-1 w-auto">
+        <span class="me-3 text-[8px] lg:text-xs  font-sm text-gray-900 dark:text-gray-300">No</span>
+        {% render_field input|add_class:"sr-only peer w-full h-6 lg:h-9 rounded-md is-non-veg"%}
+        <!-- <input type="checkbox" value="" class="sr-only peer" checked> -->
+        <div class="relative w-11 h-6 bg-green-500 rounded-full peer peer-focus:ring-4 peer-focus:ring-gray-300 dark:peer-focus:ring-gray-800 dark:bg-green-600 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-red-600"></div>
+        <span class="ms-1 lg:ms-3 text-[8px] lg:text-xs  font-sm text-gray-900 dark:text-gray-300">Yes</span>
+    </label>
+    
+{% endpartialdef %}
+
+{% partialdef filter-form %}
+
+    <div class="grid grid-cols-4 md:grid-cols-6 gap-2">
+        <div class="col-span-2 md:col-span-1">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center">Title Contains:</label>
+            {% render_field filter_form.title__icontains|add_class:"w-full h-9 rounded-md items-center" %}
+        </div>
+        <div class="col-span-2 md:col-span-1">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center">Category:</label>
+            {% render_field filter_form.category|add_class:"w-full h-9 rounded-md items-center align-middle text-sm" %}
+        </div>
+        <div class="col-span-4 md:col-span-2">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center">Sub-Category:</label>
+            {% render_field filter_form.sub_category|add_class:"w-full h-9 rounded-md" %}
+        </div>
+        <div class="col-span-2 md:col-span-1">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center">Is Non-Veg:</label>
+            {% render_field filter_form.is_non_veg|add_class:"w-full h-9 rounded-md" %}
+
+        </div>
+        <div class="col-span-2 md:col-span-1">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center">Price Between:</label>
+            <div class="flex justify-center align-middle gap-2">
+                <label class="text-gray-900 dark:text-white text-sm">Min</label>
+                {% render_field filter_form.price|add_class:"w-full h-9 mx-1 xl:mx-4 rounded-md" %}
+                <label class="text-gray-900 dark:text-white text-sm">Max</label>
+            </div>
+        </div>
+    </div>
+
+{% endpartialdef %}
+
+{% partialdef item-card-view %}
+
+    <div class="m-0">
+        <div>
+            <p class="text-center text-[10px] lg:text-base item-title font-medium">{{item.title}}</p>
+        </div>
+        <div class="text-center">
+            <a href="{{item.dish_image.url}}" target="_blank">
+                <img class="p-2 rounded-t-lg w-20 lg:w-40 h-20 lg:h-40 object-cover inline-block item-dish-image" src="{{item.dish_image.url}}" alt="product image" />
+            </a>
+        </div>
+        <div class="overflow-y-scroll">
+            <p class="h-18 lg:h-24 w-full item-description">{{item.description}} {{item.description}}</p>
+        </div>
+        <div class="border-t pt-2 mt-2 w-full font-medium">
+            <div class="grid grid-cols-7">
+                <p class="col-span-3">Price </p>
+                <p class="col-span-1">:</p>
+                <p class="item-price col-span-3">{{item.price}}</p>
+            </div>
+            <div class="grid grid-cols-7">
+                <p class="col-span-3">Category </p>
+                <p class="col-span-1 ">:</p>
+                <p class="item-price col-span-3">{{item.category}}</p>
+            </div>
+            <div class="grid grid-cols-7">
+                <p class="col-span-3">Sub Category </p>
+                <p class="col-span-1">:</p>
+                <p class="item-price col-span-3">{{item.sub_category}}</p>
+            </div>
+            <div class="grid grid-cols-7">
+                <p class="col-span-3">Is Non-veg </p>
+                <p class="col-span-1">:</p>
+                <p class="item-price col-span-3">{{item.is_non_veg}}</p>
+            </div>
+        </div>
+        <div class="pt-4 text-center">
+            <div class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-[8px] lg:text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800 cursor-pointer">
+                <span class="relative px-5 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 edit-button" id="button-{{item.slug_title}}">
+                Edit Details
+                </span>
+            </div>
+            <div class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-[8px] lg:text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800 cursor-pointer">
+                <span class="relative px-5 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 edit-button" id="button-{{item.slug_title}}">
+                Remove
+                </span>
+            </div>
+        </div>
+    </div>
+
+{% endpartialdef %}
+
+{% partialdef item-edit-form %}
+
+    <div class="hidden w-full">
+        {{ form.media }}
+        <div class="mx-2 items-center w-full">
+            {% render_field form.title|add_class:"text-center text-[10px] lg:text-base rounded-md py-1 w-full h-5 lg:h-7 title" %}
+        </div>
+        <div class="text-center">
+            <img class="p-2 rounded-t-lg w-20 lg:w-40 h-20 lg:h-40 object-cover inline-block" src="{{form.instance.dish_image.url}}" alt="product image" />
+            {% render_field form.dish_image|add_class:"text-[8px] lg:text-sm w-full text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dish-image" %}
+        </div>
+        <div class="text-[8px] lg:text-sm mt-1">
+            {% render_field form.description|add_class:"h-12 w-full lg:h-24 text-[8px] lg:text-sm description" %}
+        </div>
+        <div class="flex-col justify-center border-t-4 pt-2 mt-2 font-medium text-[8px] lg:text-sm w-full">
+            <div class="grid grid-cols-9 justify-between text-[8px] lg:text-xs items-center">
+                <p class="col-span-3 text-[8px] lg:text-xs">Price </p>
+                <p class="col-span-1 text-center mt-1">:</p>
+                {% render_field form.price|add_class:"rounded-md text-[8px] h-5 lg:h-9 lg:text-xs my-1 col-span-5 w-auto price" %}
+                <p class="col-span-3 text-[8px] lg:text-xs">Category </p>
+                <p class="col-span-1 text-center mt-1">:</p>
+                {% render_field form.category|add_class:"rounded-md text-[8px] h-5 lg:h-9 lg:text-xs col-span-5 mb-1 w-auto category" %}
+                <p class="col-span-3 text-[8px] lg:text-xs">Sub Category </p>
+                <p class="col-span-1 text-center mt-1">:</p>
+                {% render_field form.sub_category|add_class:"rounded-md text-[8px] h-5 lg:h-9 lg:text-xs col-span-5 mb-1 w-auto sub-category" %}
+                <p class="col-span-3 text-[8px] lg:text-xs">Is Non-veg </p>
+                <p class="col-span-1 text-center mt-1">:</p>
+                <!-- {% render_field form.is_non_veg|add_class:"rounded-md text-[8px] lg:text-xs col-span-5 mb-1 w-auto is-non-veg" %} -->
+                {% with input=form.is_non_veg %}
+                    {% partial toggle-button %}
+                {% endwith %}
+                <p class="hidden">col-span-5</p>
+            </div>
+        </div>
+        <div class="pt-4 text-center">
+            <div class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-[8px] lg:text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800 cursor-pointer">
+                <span class="relative px-5 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 back" id="back-{{item.slug_title}}">
+                Back
+                </span>
+            </div>
+            <div class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-[8px] lg:text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800 cursor-pointer">
+                <span class="relative px-5 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 save" id="save-{{item.slug_title}}">
+                Save
+                </span>
+            </div>
+        </div>
+    </div>
+
+{% endpartialdef %}
+
+{% partialdef hidden-subcats %}
+
+    <div class="hidden" id="hidden">
+        <p id="food_subcat">{{food_subcat}}</p>
+        <p id="drinks_subcat">{{drinks_subcat}}</p>
+        <p id="dessert_subcat">{{dessert_subcat}}</p>
+    </div>
+
+{% endpartialdef %}

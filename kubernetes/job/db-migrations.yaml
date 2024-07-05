@@ -1,0 +1,54 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: django-db-migrations
+spec:
+  ttlSecondsAfterFinished: 100
+  activeDeadlineSeconds: 60
+  template:
+    spec:
+      containers:
+      - name: migration-container
+        image: asia-south1-docker.pkg.dev/dezurich-lounge/lounge-docker-images/lounge:v1
+        command: ["sh", "-c", "python manage.py migrate && python manage.py collectstatic --noinput && python manage.py add_groups"]
+        # command: ["python",  "manage.py", "migrate"]
+        imagePullPolicy: Always
+        envFrom:
+          - secretRef:
+              name: postgres-credentials
+          - secretRef:
+              name: cloudsql-oauth-credentials
+          - configMapRef:
+              name: django-config
+        volumeMounts:
+          - name: cloudsql-oauth-credentials
+            mountPath: /secrets/cloudsql
+            readOnly: true
+        ports:
+          - containerPort: 8000
+      - image: gcr.io/cloudsql-docker/gce-proxy:1.16
+        name: cloudsql-proxy
+        command: ["/cloud_sql_proxy", "--dir=/cloudsql",
+                  "-instances=dezurich-lounge:asia-south1:lounge-database=tcp:5432",
+                  "-credential_file=/secrets/cloudsql/credentials.json"]
+        
+        volumeMounts:
+          - name: cloudsql-oauth-credentials
+            mountPath: /secrets/cloudsql
+            readOnly: true
+          - name: ssl-certs
+            mountPath: /etc/ssl/certs
+          - name: postgres-credentials
+            mountPath: /cloudsql
+            
+      volumes:
+        - name: cloudsql-oauth-credentials
+          secret:
+            secretName: cloudsql-oauth-credentials
+        - name: ssl-certs
+          hostPath:
+            path: /etc/ssl/certs
+        - name: postgres-credentials
+          emptyDir: {}
+      restartPolicy: OnFailure
+  backoffLimit: 15

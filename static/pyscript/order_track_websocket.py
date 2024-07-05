@@ -10,6 +10,7 @@ from pyweb import pydom
 chat_socket = WebSocket.new(f'ws://{window.location.host}/ws/orders/')
 
 chat_socket.onopen = lambda event: console.log('Websocket is open :', event)
+
 if pydom['#message-data'][0].html:
     
     data_to_be_sent = pydom['#message-data'][0].html.replace('"', '')

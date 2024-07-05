@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% load widget_tweaks %}
+
+{% load static %}
+
+{% block content %}
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="min-h-screen p-6 bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
+            <div class="container max-w-screen-lg mx-auto">
+                <div>
+                    
+                    <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+                        <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-4">
+                            <div class="text-gray-600">
+                                <p class="font-medium text-lg">Personal Details</p>
+                                <p>Please fill out all the fields </p>
+                                <p>Username: <b>{{request.user}}</b></p>
+                                <div class="mt-3">
+                                    <img
+                                        src="{{ request.user.userprofile.profile_pic.url }}" 
+                                        alt="" 
+                                        class="rounded-full"
+                                    >
+                                </div>
+                                
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-700" for="">Upload file</label>
+                                {% render_field profile_form.profile_pic|add_class:"block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" %}
+                                <!-- <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="user_avatar" type="file"> -->
+                                <div class="mt-1 text-sm text-gray-500 dark:text-gray-600" id="user_avatar_help">A profile picture is useful to confirm your are logged into your account</div>
+                                
+
+                                <!-- <span class="rounded">{{profile_form.profile_pic}}</span> -->
+                            </div>
+                            {% with input_class="block border border-grey-light w-full p-3 rounded mb-4" %}
+                                <div class="lg:col-span-3">
+                                    <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                                        <div class="flex justify-between md:col-span-5">
+                                            <div class="md:col-span-2 px-1">
+                                                <label for="first_name">First Name</label>
+                                                {% render_field profile_form.first_name|add_class:input_class %}
+                            
+                                                <!-- <input type="text" name="first_name" id="first_name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="First Name"/> -->
+                                            </div>
+
+                                            <div class="md:col-span-2 px-1">
+                                                <label for="last_name">Last Name</label>
+                                                {% render_field profile_form.last_name|add_class:input_class %}
+                                                <!-- <input type="text" name="last_name" id="last_name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="Last Name"/> -->
+                                            </div>
+
+                                            <div class="md:col-span-1 px-1">
+                                                <label for="phone_number">Phone Number</label>
+                                                {% render_field profile_form.phone_number|add_class:input_class %}
+                                                <!-- <input type="text" name="phone_number" id="phone_number" class="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="" value="" /> -->
+                                            </div>
+                                        </div>
+
+                                        
+                                        <div class="md:col-span-2">
+                                        <label for="group">Team</label>
+                                        {% render_field profile_form.group|add_class:input_class %} 
+                                        <!-- <input type="email" name="email" id="email" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="email@domain.com" /> -->
+                                        </div>
+                                        
+                                        <div class="md:col-span-2">
+                                            <label for="zipcode">Gender</label>
+                                            {% render_field profile_form.gender|add_class:input_class %}
+                                            <!-- <input type="text" name="phone_number" id="phone_number" class="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="" value="" /> -->
+                                        </div>
+
+                                        <div class="md:col-span-5">
+                                            <label for="address">Address / Street</label>
+                                            {% render_field profile_form.address|add_class:input_class %}
+                                            <!-- <input type="text" name="address" id="address" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="" /> -->
+                                        </div>
+
+                                        
+                                        <div class="md:col-span-3">
+                                            <label for="state">State / Union Territory</label>
+                                            <!-- <div class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1"> -->
+                                                {% render_field profile_form.state|add_class:input_class %}
+                                        </div>
+
+                                        <div class="md:col-span-1">
+                                            <label for="city">City</label>
+                                            {% render_field profile_form.city|add_class:input_class %}
+                                            <!-- <input type="text" name="city" id="city" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="" /> -->
+                                        </div>
+
+                                        <div class="md:col-span-1">
+                                            <label for="zipcode">Zipcode</label>
+                                            {% render_field profile_form.zipcode|add_class:input_class %}
+                                            <!-- <input type="text" name="zipcode" id="zipcode" class="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50" placeholder="" value="" /> -->
+                                        </div>
+
+                                        <div class="md:col-span-5 text-right">
+                                            <div class="inline-flex items-end">
+                                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Submit</button>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            {% endwith %}    
+                        </div>
+                    </div>
+                </div>
+
+                <a href="https://www.buymeacoffee.com/dgauderman" target="_blank" class="md:absolute bottom-0 right-0 p-4 float-right">
+                    <img src="https://www.buymeacoffee.com/assets/img/guidelines/logo-mark-3.svg" alt="Buy Me A Coffee" class="transition-all rounded-full w-14 -rotate-45 hover:shadow-sm shadow-lg ring hover:ring-4 ring-white">
+                </a>
+            </div>
+        </div>
+    </form>
+
+{% endblock content %}

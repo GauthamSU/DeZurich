@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: lounge-app-service
 spec:
-  type: LoadBalancer  # Adjust if needed (e.g. NodePort)
+  type: ClusterIP  # Adjust if needed (e.g. NodePort)
   selector:
     app: lounge-app
   ports:

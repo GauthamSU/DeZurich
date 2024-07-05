@@ -1,0 +1,125 @@
+
+{% load static %}
+
+{% load partials %}
+
+{% load widget_tweaks %}
+
+{% partialdef tab-section %}
+    
+<div class="border-b border-gray-200 dark:border-gray-700 col-span-4 sticky top-0 bg-slate-50 dark:bg-black z-10" id="tab-element">
+    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400 justify-center">
+        <li class="lg:me-2" id="food-tab">
+            <a href="#id_FOOD" class="inline-flex items-center justify-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500 group scroll-smooth">
+                <svg class="w-4 h-4 me-2 text-blue-600 dark:text-blue-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="#1c64f2" viewBox="0 0 20 20">
+                    <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"/>
+                </svg>
+                FOOD
+            </a>
+        </li>
+        <li class="lg:me-2" id="drinks-tab">
+            <a href="#id_DRINKS" class="inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group scroll-smooth" aria-current="page">
+                <svg class="w-4 h-4 me-2 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                    <path d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z"/>
+                </svg>DRINKS
+            </a>
+        </li>
+        <li class="lg:me-2" id="dessert-tab">
+            <a href="#id_DESSERT" class="inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group scroll-smooth">
+                <svg class="w-4 h-4 me-2 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M5 11.424V1a1 1 0 1 0-2 0v10.424a3.228 3.228 0 0 0 0 6.152V19a1 1 0 1 0 2 0v-1.424a3.228 3.228 0 0 0 0-6.152ZM19.25 14.5A3.243 3.243 0 0 0 17 11.424V1a1 1 0 0 0-2 0v10.424a3.227 3.227 0 0 0 0 6.152V19a1 1 0 1 0 2 0v-1.424a3.243 3.243 0 0 0 2.25-3.076Zm-6-9A3.243 3.243 0 0 0 11 2.424V1a1 1 0 0 0-2 0v1.424a3.228 3.228 0 0 0 0 6.152V19a1 1 0 1 0 2 0V8.576A3.243 3.243 0 0 0 13.25 5.5Z"/>
+                </svg>DESSERT
+            </a>
+        </li>
+        <li class="lg:me-2" id="hookah-tab">
+            <a href="#id_HOOKAH" class="inline-flex items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group scroll-smooth">
+                <svg class="w-4 h-4 me-2 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+                </svg>HOOKAH
+            </a>
+        </li>
+       
+    </ul>
+</div>
+
+{% endpartialdef %}
+
+{% partialdef item-card %}
+
+    <div class="flex flex-col my-2 w-full max-w-[200px] h-[95%] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <img class="p-4 rounded-t-lg w-40 h-36 mx-auto" src="{{item.dish_image.url}}" alt="product image" />
+        <div class="px-2 pb-2 h-full">
+            <div class="flex justify-between">
+                <div class="w-2/3 h-12">
+                    <h5 class="text-sm lg:text-base font-semibold tracking-tight text-gray-900 dark:text-white truncate overflow-hidden ">{{item.title}}</h5>
+                </div>
+                <div class="w-3 h-3 lg:w-6 lg:h-6">
+                    {% if item.is_non_veg %}
+                        <img src="{% static 'images/red_dot.jpg' %}" alt="" class="align-middle text-center">
+                    {% else %}
+                        <img src="{% static 'images/green_dot.png' %}" alt="" class="align-middle text-center">
+                    {% endif %}
+                </div>
+            </div>
+            <div class="flex items-center justify-between h-12">
+                <span class="text-sm text-gray-900 dark:text-white truncate overflow-hidden">{{item.description}}</span>
+            </div>
+            <div class="flex items-center justify-items-start mt-2">
+                <span class="text-xl font-bold text-gray-900 dark:text-white">₹ {{item.price}}</span>
+                <!-- <a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to cart</a> -->
+            </div>
+        </div>
+    </div>
+
+{% endpartialdef %}
+
+{% partialdef menu-sidebar %}
+
+    <aside class="fixed left-0 h-[640px] w-32 lg:w-72 border-r-4 dark:text-white">
+        <ul class="mx-4 lg:mx-8 mt-4 text-2xl lg:text-4xl mb-8 font-maamli">{{category}}</ul>
+        {% for subcat in subcat_type %}
+            <li class="mx-6 lg:mx-12 text-lg lg:text-xl list-none mb-4 hover:underline cursor-pointer">{{subcat.1}}</li>
+        {% endfor %}
+    </aside>
+
+{% endpartialdef %}
+
+{% partialdef new-item-card %}
+    <div class="grid grid-cols-4 lg:grid-cols-6 gap-2 justify-end border-b-4 mt-2">
+        <img class="lg:p-4 col-span-1 rounded-t-lg w-20 lg:w-32 h-20 lg:h-28" src="{{item.dish_image.url}}" alt="product image" />
+        <div class="lg:p-4 col-span-2 lg:col-span-4">
+            <div class="h-12">
+                <h5 class="text-sm lg:text-lg font-semibold tracking-tight text-gray-900 dark:text-white truncate overflow-hidden">{{item.title}}</h5>
+            </div>
+            <div class="h-12">
+                <span class="text-sm text-gray-900 dark:text-white truncate overflow-hidden">{{item.description}}</span>
+            </div>
+        </div>
+        <div class="w-full lg:p-4 col-span-1">
+            <div class="w-3 h-3 lg:w-6 lg:h-6 ml-auto mt-2">
+                {% if item.is_non_veg %}
+                    <img src="{% static 'images/red_dot.jpg' %}" alt="" class="align-middle text-center">
+                {% else %}
+                    <img src="{% static 'images/green_dot.png' %}" alt="" class="align-middle text-center">
+                {% endif %}
+            </div>
+            <div class="text-right ml-auto mt-4">
+                <span class="text-xs lg:text-xl font-bold text-gray-900 dark:text-white">₹ {{item.price}}</span>
+            </div>
+        </div>
+
+    </div>
+
+{% endpartialdef %}
+
+{% partialdef toggle-button %}
+
+    <label class="inline-flex items-center me-5 cursor-pointer">
+        <span class="me-3 text-sm font-medium text-gray-900 dark:text-gray-300">Vegetarian</span>
+        {% render_field input|add_class:"sr-only peer w-full h-9 rounded-md"%}
+        <!-- <input type="checkbox" value="" class="sr-only peer" checked> -->
+        <div class="relative w-11 h-6 bg-green-500 rounded-full peer peer-focus:ring-4 peer-focus:ring-gray-300 dark:peer-focus:ring-gray-800 dark:bg-green-600 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-red-600"></div>
+        <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Non-Vegetarian</span>
+    </label>
+    
+{% endpartialdef %}

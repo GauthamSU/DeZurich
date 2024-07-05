@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% load partials %}
+
+{% block content %}
+
+<div id="consumer-menu-page" class="scroll-smooth">
+    {% with partial_html_file="menu/menu_partials/" %}
+
+    {% include partial_html_file|add:"tab_card_partial.html#tab-section" %}
+            
+    <div id="id_FOOD" class="pt-4 ml-36 lg:ml-72 block animate-opacity">
+        {% with category="FOOD" subcat_type=food_subcat %}
+            {% include partial_html_file|add:"tab_card_partial.html#menu-sidebar" %}
+        {% endwith %}
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-1 mx-2 lg:mx-8">
+            {% for subcat in food_subcat %}
+                <div class="pt-4 scroll-smooth">
+                    <h1 class="uppercase text-center text-2xl lg:text-4xl pt-4 lg:mt-8 mb-4 font-maamli font-bold dark:text-white">{{subcat.1}}</h1>
+                    <div class="w-[95%] py-2">
+                        {% for item in food_items %}
+                            {% if item.sub_category == subcat.0 %}
+                                {% include partial_html_file|add:"tab_card_partial.html#new-item-card" %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id="id_DRINKS" class="pt-4 ml-36 lg:ml-72 hidden">
+        {% with category="DRINKS" subcat_type=drinks_subcat %}
+            {% include partial_html_file|add:"tab_card_partial.html#menu-sidebar" %}
+        {% endwith %}
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-1 mx-2 lg:mx-8">
+            {% for subcat in drinks_subcat %}
+                {% if subcat.0 == 'Hot Beverages'%}
+                <div class="pt-4 row-span-2">
+                {% else %}
+                <div class="pt-4">
+                {% endif %}
+                    <h1 class="uppercase text-center text-2xl lg:text-4xl pt-4 lg:mt-8 mb-4 font-maamli font-bold dark:text-white">{{subcat.1}}</h1>
+                    <div class="w-[95%] mx-auto py-2">
+                        {% for item in drinks_items %}
+                            {% if item.sub_category == subcat.0 %}
+                                {% include partial_html_file|add:"tab_card_partial.html#new-item-card" %}
+                            {% endif %}
+                            <!-- {% if item.sub_category == 'Soft Drinks' %}
+                                {% include partial_html_file|add:"tab_card_partial.html#new-item-card" %}
+                            {% endif %} -->
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id="id_DESSERT" class="pt-4 ml-36 lg:ml-72 hidden">
+        {% with category="DESSERT" subcat_type=dessert_subcat %}
+            {% include partial_html_file|add:"tab_card_partial.html#menu-sidebar" %}
+        {% endwith %}
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-1 mx-2 lg:mx-8">
+            {% for subcat in dessert_subcat %}
+                <div class="pt-4 scroll-smooth">
+                    <h1 class="uppercase text-center text-2xl lg:text-4xl pt-4 lg:mt-8 mb-4 font-maamli font-bold dark:text-white scroll-smooth">{{subcat.1}}</h1>
+                    <div class="w-[95%] mx-auto py-2">
+                        {% for item in dessert_items %}
+                            {% if item.sub_category == subcat.0 %}
+                                {% include partial_html_file|add:"tab_card_partial.html#new-item-card" %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id="id_HOOKAH" class="pt-4 ml-36 lg:ml-72 hidden">
+        {% with category="HOOKAH" subcat_type="" %}
+            {% include partial_html_file|add:"tab_card_partial.html#menu-sidebar" %}
+        {% endwith %}
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-1 mx-2 lg:mx-8">
+            <div class="w-[95%] mx-auto py-2">
+                {% for item in hookah_items %}        
+                    {% include partial_html_file|add:"tab_card_partial.html#new-item-card" %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {% endwith %}
+
+    <script type="py" src="{% static 'pyscript/menu_homepage.py' %}"></script>
+
+</div>
+
+{% endblock content %}
