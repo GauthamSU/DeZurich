@@ -1,12 +1,12 @@
 title,description,dish_image,price,is_non_veg,category,sub_category
-Classic Virgin Mojito,,dish_images\lime_mojito.jpg,150,FALSE,DRINKS,Mocktail & Mojito
-Pina Colada,,dish_images\lime_mojito.jpg,180,FALSE,DRINKS,Mocktail & Mojito
-Lime & Mint,,dish_images\lime_mojito.jpg,120,FALSE,DRINKS,Mocktail & Mojito
-Kiwi Mojito,,dish_images\lime_mojito.jpg,180,FALSE,DRINKS,Mocktail & Mojito
-Green Apple Mojito,,dish_images\lime_mojito.jpg,180,FALSE,DRINKS,Mocktail & Mojito
-Blueberry Mojito,,dish_images\lime_mojito.jpg,160,FALSE,DRINKS,Mocktail & Mojito
-Pineapple Mojito,,dish_images\lime_mojito.jpg,180,FALSE,DRINKS,Mocktail & Mojito
-Watermelon Mojito,,dish_images\lime_mojito.jpg,160,FALSE,DRINKS,Mocktail & Mojito
+Classic Virgin Mojito,,dish_images\lime_mojito.jpg,150,FALSE,DRINKS,Mocktail and Mojito
+Pina Colada,,dish_images\lime_mojito.jpg,180,FALSE,DRINKS,Mocktail and Mojito
+Lime & Mint,,dish_images\lime_mojito.jpg,120,FALSE,DRINKS,Mocktail and Mojito
+Kiwi Mojito,,dish_images\lime_mojito.jpg,180,FALSE,DRINKS,Mocktail and Mojito
+Green Apple Mojito,,dish_images\lime_mojito.jpg,180,FALSE,DRINKS,Mocktail and Mojito
+Blueberry Mojito,,dish_images\lime_mojito.jpg,160,FALSE,DRINKS,Mocktail and Mojito
+Pineapple Mojito,,dish_images\lime_mojito.jpg,180,FALSE,DRINKS,Mocktail and Mojito
+Watermelon Mojito,,dish_images\lime_mojito.jpg,160,FALSE,DRINKS,Mocktail and Mojito
 Belgian Chocolate,,dish_images\blue_lagoon_mojito.jpg,180,FALSE,DRINKS,Milkshake
 Oreo,,dish_images\blue_lagoon_mojito.jpg,160,FALSE,DRINKS,Milkshake
 Kitkat,,dish_images\blue_lagoon_mojito.jpg,180,FALSE,DRINKS,Milkshake

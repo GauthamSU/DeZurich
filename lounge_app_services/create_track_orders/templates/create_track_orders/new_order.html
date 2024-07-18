@@ -2,216 +2,131 @@
 
 {% load static %}
 
+{% load partials %}
+
+{% load widget_tweaks %}
+
 {% block content %}
 
-<!-- <py-config class="hidden">
-    packages = ['requests', 'pyodide-http']
-</py-config> -->
-
-<form class="m-4 text-center" method="post">
-
-    {% csrf_token %}
-
-    <div class="flex align-middle justify-center px-2 pb-4">
-        <label for="" class="px-4 dark:text-white text-center rounded-lg text-gray-800 bg-white dark:bg-gray-700 me-2 py-2 border border-gray-800 dark:border-white">Table Number</label>
-        <input type="number" value="0" class="w-14 h-10 text-lg text-center rounded-md" id="table_number" name="table-number">
-    </div>
-
-    <div class="grid grid-cols-3 gap-4">
+<div id="id-place-order-page">
+    <form class="m-4 text-center" method="post">
         
-        <div id="food_items">
-            <h4 class="py-2 mb-4 text-xl bg-red-400 rounded-lg font-medium border border-spacing-1 border-red-800 shadow-sm shadow-red-200">FOOD ITEMS</h4>
-            {% for item in menu_items %}
-                {% if item.category == 'FOOD' %}
-                    <div class="flex flex-col" id="{{item.slug_title}}">
-                        <div class="flex justify-center my-1 h-10 ">
-                            <div class="text-white align-middle text-left justify-center px-2 w-60 border dark:border-white border-gray-800  rounded-md shadow-md dark:bg-gray-800 bg-teal-600 menu-item">
-                                {{item.title}}
-                                
-                            </div>
-                            <input type="text" class="hidden" value="{{item.title}}" name="{{item.slug_title}}">
-                            <div class="flex align-middle justify-between px-2">
-                                <div class="flex justify-center">
-                                    <input type="button" value="-" class="mx-1 w-10 h-10 text-lg text-center cursor-pointer border dark:border-white border-gray-800 dark:text-white text-gray-800 minus" id="minus-{{item.slug_title}}">
-                                    <input type="number" value="0" class="mx-1 w-10 h-10 text-lg text-center quantity" id="quantity-{{item.slug_title}}" name="quantity-{{item.slug_title}}">
-                                    <input type='button' value='+' class="mx-1 w-10 h-10 text-center cursor-pointer text-lg border dark:border-white border-gray-800 dark:text-white text-gray-800 plus" id="plus-{{item.slug_title}}"/>
-                                </div>
-                            </div>
-                        
-                            <div class="flex align-middle justify-between px-2">
-                                <button type="button" class="px-1 bg-teal-600 dark:bg-gray-800 text-white text-center rounded-md preference" id="preference-{{item.slug_title}}">Preference</button>
-                            </div>
-                            <div class="mx-4 text-center border dark:border-white border-gray-800 dark:text-white p-1 text-gray-800 bg-yellow-100 dark:bg-gray-800 rounded-md price" id="price-{{item.slug_title}}">
-                                {{ item.price }}
-                            </div>
-                            <input type="text" value="{{item.price}}" name="price-{{item.slug_title}}" class="hidden">
-                        </div>
-                        <div class="mx-6 py-2 preference_input hidden">
-                            <input type="text" placeholder="Enter customer preference" class="text-center rounded-md border dark:border-white border-gray-800 w-full" value="" id="preference-{{item.slug_title}}" name="preference-{{item.slug_title}}">
-                        </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
-        </div>
+        {% csrf_token %}
 
-        <div id="drinks_items">
-            <h4 class="py-2 mb-4 text-xl bg-red-400 rounded-lg font-medium border border-spacing-1 border-red-800 shadow-sm shadow-red-200">DRINKS ITEMS</h4>
-            {% for item in menu_items %}
-                {% if item.category == 'DRINKS' %}
-                    <div class="flex flex-col" id="{{item.slug_title}}">
-                        <div class="flex justify-center my-1 h-10 ">
-                            <div class="text-white align-middle text-left justify-center px-2 w-60 border dark:border-white border-gray-800  rounded-md shadow-md dark:bg-gray-800 bg-teal-600 menu-item">
-                                {{item.title}}
-                                
-                            </div>
-                            <input type="text" class="hidden" value="{{item.title}}" name="{{item.slug_title}}">
-                            <div class="flex align-middle justify-between px-2">
-                                <div class="flex justify-center">
-                                    <input type="button" value="-" class="mx-1 w-10 h-10 text-lg text-center cursor-pointer border dark:border-white border-gray-800 dark:text-white text-gray-800 minus" id="minus-{{item.slug_title}}">
-                                    <input type="number" value="0" class="mx-1 w-10 h-10 text-lg text-center quantity" id="quantity-{{item.slug_title}}" name="quantity-{{item.slug_title}}">
-                                    <input type='button' value='+' class="mx-1 w-10 h-10 text-center cursor-pointer text-lg border dark:border-white border-gray-800 dark:text-white text-gray-800 plus" id="plus-{{item.slug_title}}"/>
-                                </div>
-                            </div>
-                        
-                            <div class="flex align-middle justify-between px-2">
-                                <button type="button" class="px-1 bg-teal-600 dark:bg-gray-800 text-white text-center rounded-md preference" id="preference-{{item.slug_title}}">Preference</button>
-                            </div>
-                            <div class="mx-4 text-center border dark:border-white border-gray-800 dark:text-white p-1 text-gray-800 bg-yellow-100 dark:bg-gray-800 rounded-md price" id="price-{{item.slug_title}}">
-                                {{ item.price }}
-                            </div>
-                            <input type="text" value="{{item.price}}" name="price-{{item.slug_title}}" class="hidden">
-                        </div>
-                        <div class="mx-6 py-2 preference_input hidden">
-                            <input type="text" placeholder="Enter customer preference" class="text-center rounded-md border dark:border-white border-gray-800 w-full" value="" id="preference-{{item.slug_title}}" name="preference-{{item.slug_title}}">
-                        </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
-        </div>
-
-        <div id="hookah_items">
-            <h4 class="py-2 mb-4 text-xl bg-red-400 rounded-lg font-medium border border-spacing-1 border-red-800 shadow-sm shadow-red-200">HOOKAH ITEMS</h4>
-            {% for item in menu_items %}
-                {% if item.category == 'HOOKAH' %}
-                    <div class="flex flex-col" id="{{item.slug_title}}">
-                        <div class="flex justify-center my-1 h-10 ">
-                            <div class="text-white align-middle text-left justify-center px-2 w-60 border dark:border-white border-gray-800  rounded-md shadow-md dark:bg-gray-800 bg-teal-600 menu-item">
-                                {{item.title}}
-                                
-                            </div>
-                            <input type="text" class="hidden" value="{{item.title}}" name="{{item.slug_title}}">
-                            <div class="flex align-middle justify-between px-2">
-                                <div class="flex justify-center">
-                                    <input type="button" value="-" class="mx-1 w-10 h-10 text-lg text-center cursor-pointer border dark:border-white border-gray-800 dark:text-white text-gray-800 minus" id="minus-{{item.slug_title}}">
-                                    <input type="number" value="0" class="mx-1 w-10 h-10 text-lg text-center quantity" id="quantity-{{item.slug_title}}" name="quantity-{{item.slug_title}}">
-                                    <input type='button' value='+' class="mx-1 w-10 h-10 text-center cursor-pointer text-lg border dark:border-white border-gray-800 dark:text-white text-gray-800 plus" id="plus-{{item.slug_title}}"/>
-                                </div>
-                            </div>
-                        
-                            <div class="flex align-middle justify-between px-2">
-                                <button type="button" class="px-1 bg-teal-600 dark:bg-gray-800 text-white text-center rounded-md preference" id="preference-{{item.slug_title}}">Preference</button>
-                            </div>
-                            <div class="mx-4 text-center border dark:border-white border-gray-800 dark:text-white p-1 text-gray-800 bg-yellow-100 dark:bg-gray-800 rounded-md price" id="price-{{item.slug_title}}">
-                                {{ item.price }}
-                            </div>
-                            <input type="text" value="{{item.price}}" name="price-{{item.slug_title}}" class="hidden">
-                        </div>
-                        <div class="mx-6 py-2 preference_input hidden">
-                            <input type="text" placeholder="Enter customer preference" class="text-center rounded-md border dark:border-white border-gray-800 w-full" value="" id="preference-{{item.slug_title}}" name="preference-{{item.slug_title}}">
-                        </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
-        </div>
-        
-    </div>
-
-    <div class="flex justify-center">
-        <!-- Modal toggle and Popover button-->
-        <button data-modal-target="select-modal" data-popover-target="popover-top" data-popover-placement="top" data-modal-toggle="select-modal" class="block mx-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm rounded-full px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" id="preview_button">
-            Preview
-        </button>
-        
-        <!-- Popover element -->
-        <div data-popover id="popover-top" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
-            <!-- <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
-                <h3 class="font-semibold text-gray-900 dark:text-white">Popover top</h3>
-            </div> -->
-            <div class="px-3 py-2">
-                <p>Please enter the table number for the Order.</p>
+        <div class="grid grid-cols-6 xl:grid-cols-12 px-2 pb-4 mb-2">
+            <div class="col-start-auto col-end-4 xl:col-start-6 xl:col-end-8 flex justify-center">
+                <label for="" class="px-4 dark:text-white text-sm md:text-base xl:text-lg text-center rounded-lg text-gray-800 bg-slate-200 dark:bg-gray-700 me-2 py-2 border border-gray-800 dark:border-white">Table Number</label>
+                <input type="number" value="0" class="w-14 h-10 xl:h-12 text-sm md:text-base xl:text-lg text-center rounded-md" id="table_number" name="table-number">
             </div>
-            <div data-popper-arrow></div>
+            <div class="col-start-5 col-end-7 xl:col-start-11 xl:col-end-13">
+                {% include 'create_track_orders/partials/create_order_partial.html#preview-button-popover' %}
+            </div>
         </div>
-        <!-- <button type="submit" class="mx-2 text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900">Submit</button>  -->
-    </div>
 
-    <div class="fixed bottom-2 right-2" id="order_total_block">
-        <h3 class="text-black dark:text-white"><strong class="underline">Order Total</strong></h3>
-        <div>
-            <p class="text-black dark:text-white">Number of items ordered: <strong id="num_items">0</strong></p>
-            <input type="text" value="0" class="hidden" name="total-items">
-            <p class="text-black dark:text-white">Total Amount: <strong id="total_amount">0</strong></p>
-            <input type="text" value="0" class="hidden" name="total-amount">
-        </div>
-    </div>
-
-    <!-- Main modal -->
-    <div id="select-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-        <div class="relative p-4 w-full max-w-md max-h-full">
-            <!-- Modal content -->
-            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                <!-- Modal header -->
-                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                        Ordered Items
-                    </h3>
-                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm h-8 w-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="select-modal">
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+        
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-4">
+            
+            <div id="food_items">
+                <div class="w-full py-1 mb-4 grid grid-cols-6 items-center bg-red-400 text-red-900 rounded-lg font-medium border border-spacing-1 border-red-800 shadow-sm shadow-red-200" id="food_drop_down">
+                    <h4 class="px-2 text-xl col-span-5 xl:col-span-6 flex justify-center items-center">
+                        FOOD ITEMS
+                    </h4>
+                    <span class="col-span-1 flex xl:hidden justify-end items-end pe-5 " >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                         </svg>
-                        <span class="sr-only">Close modal</span>
-                    </button>
+                    </span>
                 </div>
-                <!-- Modal body -->
-                <div class="p-4 md:p-5">
-                    <div class="flex justify-between">
-                        <p class="text-gray-500 dark:text-gray-400 mb-4">List of ordered items: </p>
-                        <p class="text-gray-500 dark:text-gray-400 mb-4 text-lg font-normal rounded-md bg-zinc-50 dark:bg-gray-600 px-5 border" id="modal_table_num">Table Number: </p>
-                    </div>
-                    <ul class="space-y-4 mb-4" id="food_list">
-                        <p class="dark:text-white text-gray-900 text-lg font-medium" id="food_ordered">Foods Ordered: </p>
-                        
-                    </ul>
-
-                    <ul class="space-y-4 mb-4" id="drinks_list">
-                        <p class="dark:text-white text-gray-900 text-lg font-medium" id="drinks_ordered">Drinks Ordered: </p> 
-
-                    </ul>
-
-                    <ul class="space-y-4 mb-4" id="hookah_list">
-                        <p class="dark:text-white text-gray-900 text-lg font-medium" id="hookah_ordered">Hookah Ordered: </p> 
-
-                    </ul>
-                    <p class="flex justify-center mx-auto mb-4 text-lg font-normal text-gray-900 bg-green-500 border border-gray-200 rounded-lg dark:border-gray-500 dark:text-white dark:bg-gray-800 w-1/2" id="order_total">Order Total : </p>
-                    <button type="submit" id="submit_botton" data-popover-target="popover-bottom" data-popover-placement="bottom" class="text-white inline-flex w-full justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Place Order
-                    </button>
-                    <div data-popover id="popover-bottom" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
-                        
-                        <div class="px-3 py-2">
-                            <p>There are no items to place order</p>
+                <div class="hidden xl:flex justify-evenly mb-4 gap-1" id="food-filter-form" >
+                    <div class="relative">
+                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2"/>
+                            </svg>
                         </div>
-                        <div data-popper-arrow></div>
+                        {% render_field food_order_filters.title__icontains|add_class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search by item name..." hx-get="/internal/order/place-order/filter/FOOD/" hx-trigger="keyup changed" hx-target='#filtered-json-data' hx-swap="innerHTML" hx-include="#food-filter-form" %}
                     </div>
+                    {% render_field food_order_filters.sub_category|add_class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="food_{{food_order_filters.sub_category.id}}" hx-get="/internal/order/place-order/filter/FOOD/" hx-trigger="change" hx-target='#filtered-json-data' hx-swap="innerHTML" hx-include="#food-filter-form" %}
+                    {% render_field food_order_filters.is_non_veg|add_class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="food_{{food_order_filters.is_non_veg.id}}" hx-get="/internal/order/place-order/filter/FOOD/" hx-trigger="change" hx-target='#filtered-json-data' hx-swap="innerHTML" hx-include="#food-filter-form" %}
+                </div>
+                
+                <div id="food-items-list" class="hidden xl:block">
+                    {% with cate_gory='FOOD' items=menu_items %}
+                        {% include 'create_track_orders/partials/create_order_partial.html#item-card-row' %}
+                    {% endwith %}
                 </div>
             </div>
+            <div id="drinks_items">
+                <div class="w-full py-1 mb-4 grid grid-cols-6 items-center bg-red-400 text-red-900 rounded-lg font-medium border border-spacing-1 border-red-800 shadow-sm shadow-red-200" id="drinks_drop_down">
+                    <h4 class="px-2 text-xl col-span-5 xl:col-span-6 flex justify-center items-center">
+                        DRINKS & DESSERT ITEMS
+                    </h4>
+                    <span class="col-span-1 flex xl:hidden justify-end items-end pe-5" >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                        </svg>
+                    </span>
+                </div>
+                <div class="hidden xl:flex justify-evenly mb-4" id="drinks-filter-form">
+                    <div class="relative">
+                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2"/>
+                            </svg>
+                        </div>
+                        {% render_field drinks_dessert_order_filters.title__icontains|add_class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search by item name..." hx-get="/internal/order/place-order/filter/DRINKS/" hx-trigger="keyup changed" hx-target='#filtered-json-data' hx-swap="innerHTML" hx-include="#drinks-filter-form" %}
+                    </div>
+                    {% render_field drinks_dessert_order_filters.sub_category|add_class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" hx-get="/internal/order/place-order/filter/DRINKS/" hx-trigger="change" hx-target='#filtered-json-data' hx-swap="innerHTML" hx-include="#drinks-filter-form" %}
+                </div>
+                <div id="drinks-items-list" class="hidden xl:block">
+                    {% with cate_gory="DRINKS DESSERT" items=menu_items %}
+                        {% include 'create_track_orders/partials/create_order_partial.html#item-card-row' %}
+                    {% endwith %}
+                </div>
+            </div>
+
+            <div id="hookah_items">
+                <div class="w-full py-1 mb-4 grid grid-cols-6 bg-red-400 text-red-900 rounded-lg font-medium border border-spacing-1 border-red-800 shadow-sm shadow-red-200" id="hookah_drop_down">
+                    <h4 class="px-2 text-xl col-span-5 xl:col-span-6 flex justify-center items-center">
+                        HOOKAH ITEMS
+                    </h4>
+                    <span class="col-span-1 flex xl:hidden justify-end items-end pe-5" >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                        </svg>
+                    </span>
+                </div>
+                    
+                <div class="hidden xl:flex justify-evenly mb-4" id="hookah-filter-form">
+                    <div class="relative">
+                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2"/>
+                            </svg>
+                        </div>
+                        {% render_field hookah_order_filters.title__icontains|add_class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search by item name..." hx-get="/internal/order/place-order/filter/HOOKAH/" hx-trigger="keyup changed" hx-target='#filtered-json-data' hx-swap="innerHTML"  %}
+                    </div>
+                    
+                </div>
+                <div id="hookah-items-list" class="hidden xl:block">
+                    {% with cate_gory='HOOKAH' items=menu_items %}
+                        {% include 'create_track_orders/partials/create_order_partial.html#item-card-row' %}
+                    {% endwith %}
+                </div>
+            </div>
+            
         </div>
-    </div>
 
-</form>
+        
+        {% include 'create_track_orders/partials/create_order_partial.html#order-total-box' %}
 
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+        {% include 'create_track_orders/partials/create_order_partial.html#preview-modal' %}
 
-<script type="py" src="{% static 'pyscript/neworder.py' %}"></script>
+    </form>
+
+    <script type="py" src="{% static 'pyscript/neworder.py' %}"></script>
+    
+    {{data|json_script:"filtered-json-data"}}
+</div>
 
 {% endblock content %}

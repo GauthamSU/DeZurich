@@ -1,0 +1,126 @@
+{% load static %}
+
+{% load partials %}
+
+{% partialdef served-confirm-modal %}
+
+    <div id="popup-modal-served" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal-served">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+                <div class="p-4 md:p-5 text-center">
+                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                    </svg>
+                    <h4 id="served-confirmation" class="mb-5 text-base font-semibold text-gray-500 dark:text-gray-400">Are you sure the dishes are served for the Order? 
+                        <p>Order ID: <span class="bg-red-500 dark:bg-gray-400 rounded-md text-white dark:text-white px-4 border border-red-500 dark:border-black"></span></p>
+                        <p>Table Number: <span class="bg-red-500 dark:bg-gray-400 rounded-md text-white dark:text-white px-4 border border-red-500 dark:border-black"></span></p>
+                    </h4>
+                    <button data-modal-hide="popup-modal-served" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2" id="confirm-served">
+                        Yes, I'm sure
+                    </button>
+                    <button data-modal-hide="popup-modal-served" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endpartialdef %}
+
+
+{% partialdef prepared-confirm-modal %}
+
+    <div id="popup-modal-prepared" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal-prepared">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+                <div class="p-4 md:p-5 text-center">
+                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                    </svg>
+                    <h4 id="prepared-confirmation" class="mb-5 text-base font-semibold text-gray-500 dark:text-gray-400">IS THE ORDER PREPARED TO BE SERVED? 
+                        <p>Order ID: <span class="bg-red-500 dark:bg-gray-400 rounded-md text-white dark:text-white px-4 border border-red-500 dark:border-black"></span></p>
+                        <p>Table Number: <span class="bg-red-500 dark:bg-gray-400 rounded-md text-white dark:text-white px-4 border border-red-500 dark:border-black"></span></p>
+                    </h4>
+                    <button data-modal-hide="popup-modal-prepared" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2" id="confirm-prepared">
+                        Yes, I'm sure
+                    </button>
+                    <button data-modal-hide="popup-modal-prepared" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endpartialdef %}
+
+
+{% partialdef order-buttons %}
+
+    <div class="inline-flex rounded-md shadow-sm justify-center gap-2" role="group">
+        <button type="button" data-modal-target="popup-modal-prepared" data-modal-toggle="popup-modal-prepared" class="relative inline-flex items-center justify-center p-0.5 px-1 mb-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 order-prepared">
+            <span class="relative px-2 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0" id="prepared-{{order.order_id}}" data-prepared-time="">
+            Order Prepared
+            </span>
+        </button>
+        <button type="button" data-modal-target="popup-modal-served" data-modal-toggle="popup-modal-served" class="relative inline-flex items-center justify-center p-0.5 px-1 mb-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 order-served">
+            <span class="relative px-2 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0" id="served-{{order.order_id}}">
+            Order Served
+            </span>
+        </button>
+    </div>
+
+{% endpartialdef %}
+
+
+{% partialdef kitchen-order-card %}
+
+{% if order.order_prepared %}
+<div class="flex flex-col justify-between gap-1 max-w-sm text-center bg-gradient-to-bl from-green-600 to-green-300 border border-spacing-1 border-blue-300 rounded-md py-1 my-2 text-white" id="id-{{order.order_id}}">
+{% else %}
+<div class="flex flex-col justify-between gap-1 max-w-sm text-center bg-gradient-to-bl from-orange-700 to-orange-400 border border-spacing-1 border-blue-300 rounded-md py-1 my-2 text-white" id="id-{{order.order_id}}">
+{% endif %}    
+    <div class="flex flex-col justify-evenly text-sm font-normal font-mono">
+        <div class="font-medium">Table Number : <span class="text-lg font-bold font-sans bg-teal-300 rounded-md px-2 mx-2 text-red-950 border border-blue-700 table-number">{{order.table_num}}</span></div>
+        <div class="font-medium">Order ID : <span class="text-md font-bold px-5 font-sans">{{order.order_id}}</span></div>
+        <div class="font-medium">Order placed by : <span class="text-md font-bold font-sans">{{order.employee.full_name}}</span></div>
+        <div class="font-medium">Ordered Time : <span class="text-md font-bold font-sans">{{order.order_placed|timesince}} ago</span></div>
+    </div>
+    <div class="ordered-items-all font-serif">
+        {% for category in cat_choices %}
+        <div class="{{category.0|lower}}-ordered-items-all">
+            <p class="font-mono font-bold text-red-900 underline underline-offset-4 text-xs lg:text-base">~ {{category.0}} items ordered ~</p>
+            {% for item in order.orderitem_set.all %}
+            {% if item.product.category == category.0 %}
+            <div class="flex flex-col justify-between">
+                <div class="grid grid-cols-12 px-2 mx-4 text-xs lg:text-base items-center">
+                    <p class="font-medium text-left col-span-10">{{item.product.title}}</p>
+                    {% if item.product.is_non_veg %}
+                        <img src="{% static 'images/red_dot.jpg' %}" alt="" class="align-middle h-2 xl:h-4 w-2 xl:w-4 text-center col-span-1">
+                    {% else %}
+                        <img src="{% static 'images/green_dot.png' %}" alt="" class="align-middle h-2 xl:h-4 w-2 xl:w-4 text-center col-span-1">
+                    {% endif %}
+                    <p class="font-bold text-center">{{item.quantity}}</p>
+                </div>
+                <div>
+                    <p class="font-normal text-[10px] lg:text-sm">{{item.preference}}</p>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+
+    {% partial order-buttons %}
+</div>
+{% endpartialdef %}

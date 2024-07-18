@@ -27,7 +27,9 @@ def subcat_condition():
         [subcat.options.add(value=value, html=text) for value, text in food_subcat]
     elif category == 'DESSERT':
         [subcat.options.add(value=value, html=text) for value, text in dessert_subcat]
-
+    else:
+        subcat.options.add(value="Hookah", html="Hookah")
+        
     select2 = pydom['.select2']
     # i=0
     # while not select2 and i < 5:

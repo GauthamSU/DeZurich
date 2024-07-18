@@ -20,8 +20,8 @@ class MenuItemForm(forms.ModelForm):
         model = MenuItems
         fields = '__all__'
         widgets = {
-            'dish_image': FileInput(attrs={'onchange':"previewImage()"}),
-            # 'sub_category': SubCategoryWidget()
+            'dish_image': FileInput(),
+            # attrs={'onchange':"previewImage()"}
             'sub_category': s2forms.Select2Widget(attrs={
                 'data-selection-css-class': ":all:"
             }),
@@ -34,6 +34,8 @@ class EditMenuItemForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['title'].widget.attrs.update({'placeholder':'Enter the Title'})
         self.fields['price'].widget.attrs.update({'placeholder':'Enter the price'})
+        for field_name, field in self.fields.items():
+            field.widget.attrs['id'] = f"id_{self.instance.slug_title}_{field_name}"
         
 
     class Meta:
@@ -45,8 +47,3 @@ class EditMenuItemForm(forms.ModelForm):
             'is_non_veg': CheckboxInput()
         }
 
-
-class MenuFilterForm(forms.ModelForm):
-    class Meta:
-        model = MenuItems
-        fields = ('category', 'sub_category')

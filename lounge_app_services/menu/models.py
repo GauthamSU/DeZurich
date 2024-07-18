@@ -5,7 +5,7 @@ from django.utils.text import slugify
 CATEGORY_CHOICES = (('FOOD', 'FOOD'), ('DRINKS', 'DRINKS'), ('DESSERT', 'DESSERT'), ('HOOKAH', 'HOOKAH'))
 
 DRINKS_SUBCAT_CHOICES = (
-    ('Mocktail & Mojito', 'Mocktail & Mojito'), 
+    ('Mocktail and Mojito', 'Mocktail & Mojito'), 
     ('Milkshake', 'Milkshake'),
     ('Frappuccino', 'Frappuccino'),
     ('Hot Beverages', 'Hot Beverages'),
@@ -30,7 +30,11 @@ DESSERT_SUBCAT_CHOICES = (
     ('Dessert', 'Dessert')
 )
 
-SUBCAT_CHOICES = DRINKS_SUBCAT_CHOICES + FOOD_SUBCAT_CHOICES + DESSERT_SUBCAT_CHOICES
+HOOKAH_SUBCAT_CHOICES = (
+    ('Hookah', 'Hookah'),
+)
+
+SUBCAT_CHOICES = DRINKS_SUBCAT_CHOICES + FOOD_SUBCAT_CHOICES + DESSERT_SUBCAT_CHOICES + HOOKAH_SUBCAT_CHOICES
 
 class MenuItems(models.Model):
     title = models.CharField(max_length=100, blank=True, null=True)

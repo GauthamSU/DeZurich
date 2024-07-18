@@ -34,6 +34,8 @@ module.exports = {
         caveat: ['"Caveat"', 'cursive'],
         graduate: ['"Graduate"', 'serif'],
         marko: ['"Marko One"', 'serif'],
+        roboto: ['"Roboto"', 'sans-serif'],
+        josefin: ['"Josefin Sans"', 'sans-serif'],
         maamli: ['"Ga Maamli"', 'sans-serif']
       },
   },

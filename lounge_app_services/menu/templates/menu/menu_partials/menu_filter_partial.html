@@ -51,48 +51,60 @@
 
 {% partialdef item-card-view %}
 
-    <div class="m-0">
+    <div class="m-0" id="id-{{item.slug_title}}">
         <div>
             <p class="text-center text-[10px] lg:text-base item-title font-medium">{{item.title}}</p>
         </div>
         <div class="text-center">
+            
             <a href="{{item.dish_image.url}}" target="_blank">
-                <img class="p-2 rounded-t-lg w-20 lg:w-40 h-20 lg:h-40 object-cover inline-block item-dish-image" src="{{item.dish_image.url}}" alt="product image" />
+            
+            <img class="p-2 rounded-t-lg w-20 lg:w-40 h-20 lg:h-40 object-cover inline-block item-dish-image" src="{{item.dish_image.url}}" alt="product image" />
             </a>
         </div>
         <div class="overflow-y-scroll">
             <p class="h-18 lg:h-24 w-full item-description">{{item.description}} {{item.description}}</p>
         </div>
         <div class="border-t pt-2 mt-2 w-full font-medium">
-            <div class="grid grid-cols-7">
-                <p class="col-span-3">Price </p>
+            <div class="grid grid-cols-11">
+                <p class="col-span-5">Price </p>
                 <p class="col-span-1">:</p>
-                <p class="item-price col-span-3">{{item.price}}</p>
+                <p class="item-price col-span-5">{{item.price}}</p>
             </div>
-            <div class="grid grid-cols-7">
-                <p class="col-span-3">Category </p>
+            <div class="grid grid-cols-11">
+                <p class="col-span-5">Category </p>
                 <p class="col-span-1 ">:</p>
-                <p class="item-price col-span-3">{{item.category}}</p>
+                <p class="item-price col-span-5">{{item.category}}</p>
             </div>
-            <div class="grid grid-cols-7">
-                <p class="col-span-3">Sub Category </p>
+            <div class="grid grid-cols-11">
+                <p class="col-span-5">Sub Category </p>
                 <p class="col-span-1">:</p>
-                <p class="item-price col-span-3">{{item.sub_category}}</p>
+                <p class="item-price col-span-5">{{item.sub_category}}</p>
             </div>
-            <div class="grid grid-cols-7">
-                <p class="col-span-3">Is Non-veg </p>
+            <div class="grid grid-cols-11">
+                <p class="col-span-5">Is Non-veg </p>
                 <p class="col-span-1">:</p>
-                <p class="item-price col-span-3">{{item.is_non_veg}}</p>
+                <p class="item-price col-span-5">{{item.is_non_veg}}</p>
             </div>
         </div>
         <div class="pt-4 text-center">
             <div class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-[8px] lg:text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800 cursor-pointer">
-                <span class="relative px-5 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 edit-button" id="button-{{item.slug_title}}">
+                <span 
+                    class="relative px-5 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 edit-button" 
+                    id="button-{{item.slug_title}}"
+                    hx-get="{% url 'menu-edit-details' item.slug_title %}"
+                    hx-trigger="click"
+                    hx-target="#id-{{item.slug_title}}"
+                    hx-swap="outerHTML"
+                >
                 Edit Details
                 </span>
             </div>
             <div class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-[8px] lg:text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800 cursor-pointer">
-                <span class="relative px-5 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 edit-button" id="button-{{item.slug_title}}">
+                <span 
+                    class="relative px-5 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 edit-button" 
+                    id="button-{{item.slug_title}}"
+                >
                 Remove
                 </span>
             </div>
@@ -103,8 +115,14 @@
 
 {% partialdef item-edit-form %}
 
-    <div class="hidden w-full">
-        {{ form.media }}
+    <form method="post" id="id-form-{{form.slug_title.value}}" class="w-full form-wrapper" enctype="multipart/form-data"
+        hx-boost="true"
+        hx-post="{% url 'menu-edit-details' form.slug_title.value %}"
+        hx-target="#id-form-{{form.slug_title.value}}"
+        hx-swap="outerHTML"
+    >
+        {% csrf_token %}
+        <!-- {{ form.media }} -->
         <div class="mx-2 items-center w-full">
             {% render_field form.title|add_class:"text-center text-[10px] lg:text-base rounded-md py-1 w-full h-5 lg:h-7 title" %}
         </div>
@@ -128,7 +146,6 @@
                 {% render_field form.sub_category|add_class:"rounded-md text-[8px] h-5 lg:h-9 lg:text-xs col-span-5 mb-1 w-auto sub-category" %}
                 <p class="col-span-3 text-[8px] lg:text-xs">Is Non-veg </p>
                 <p class="col-span-1 text-center mt-1">:</p>
-                <!-- {% render_field form.is_non_veg|add_class:"rounded-md text-[8px] lg:text-xs col-span-5 mb-1 w-auto is-non-veg" %} -->
                 {% with input=form.is_non_veg %}
                     {% partial toggle-button %}
                 {% endwith %}
@@ -137,18 +154,49 @@
         </div>
         <div class="pt-4 text-center">
             <div class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-[8px] lg:text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800 cursor-pointer">
-                <span class="relative px-5 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 back" id="back-{{item.slug_title}}">
-                Back
+                <span 
+                    class="relative px-5 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 back" 
+                    id="back-{{form.slug_title.value}}"
+                    hx-get="{% url 'menu-card-details' form.slug_title.value %}"
+                    hx-target="#id-form-{{form.slug_title.value}}"
+                    hx-trigger="click"
+                    hx-swap="outerHTML"
+                >
+                    Back
                 </span>
             </div>
             <div class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-[8px] lg:text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800 cursor-pointer">
-                <span class="relative px-5 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 save" id="save-{{item.slug_title}}">
+                <button
+                    type="submit" 
+                    class="relative px-5 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 save" 
+                    id="save-{{form.slug_title.value}}"
+                >
                 Save
-                </span>
+                </button>
             </div>
         </div>
-    </div>
+        <script type="py" src="{% static 'pyscript/menu_edit.py' %}"></script>
 
+        <script>
+        inputs = document.getElementsByName('dish_image')
+        inputs.forEach(input => {
+            
+            input.onchange = function previewImage(event) {
+                image = event.target.previousElementSibling
+                var file = event.target.files[0];
+                
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        image.src = e.target.result;
+                    };
+        
+                    reader.readAsDataURL(file);
+                }
+            }
+        })
+        </script>
+    </form>
 {% endpartialdef %}
 
 {% partialdef hidden-subcats %}

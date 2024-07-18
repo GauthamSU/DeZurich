@@ -1,9 +1,7 @@
 from django import forms
-# from .models import OrderDetails, OrderItem
-# from menu.models import MenuItems
+from .models import OrderItem
 
-# class OrderItemForm(forms.ModelForm):
-#     class Meta:
-#         model = OrderItem
-#         fields = '__all__'
-#         exclude = ['order']
+class OrderItemForm(forms.ModelForm):
+    class Meta:
+        model = OrderItem
+        fields = '__all__'

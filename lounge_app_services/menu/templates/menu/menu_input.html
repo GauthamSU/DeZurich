@@ -8,164 +8,182 @@
 
 {% block content %}
 
-<head>
-  {{form.media.css}}
-</head>
+  <head>
+    {{form.media.css}}
+  </head>
 
-<div id="menu-input-page">
+  <div id="menu-input-page">
 
 
-  <h4 class="m-4 py-2 text-center text-xl font-medium text-[#033E3E] bg-[#38ACEC] rounded-xl border border-stone-500">
-            Create New Menu Item
-  </h4>
-  <div class="flex items-center justify-between py-12 dark:bg-gray-700 gap-4">
-    <div class="mx-auto flex flex-col justify-center gap-40">
-      
-      <div class="items-center text-center">
-        <button 
-          class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800 grid-rows-1"
-          hx-get="{% url 'menu-edit' %}" 
-          hx-target="#menu-input-page" 
-          hx-select="#menu-edit-filter-page"
-          hx-push-url="true"
-          >
-          <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-            Go to Edit Page
-          </span>
-        </button>
-      </div>
-
-      <div class="mx-auto items-center text-center grid-rows-5">
-        <img id="preview_image" src="{% static 'images/dummy_image.png' %}" alt="{% static 'images/dummy_image.png' %}" class="w-96 mx-2">
-      </div>
-
-      <div></div>
-      
-    </div>
-    <div class="mx-auto w-full max-w-[550px]">
-      <form action="" method="POST" enctype="multipart/form-data" class="mx-2">
-          {% csrf_token %}    
-        <div class="mb-5">
-          <label
-            for=""
-            class="mb-3 block text-base font-medium text-[#07074D] dark:text-cyan-100"
-          >
-            Title
-          </label>
-          {% render_field form.title|add_class:"w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"%}
-        </div>
-        <div class="mb-5">
-          <label
-            for=""
-            class="mb-3 block text-base font-medium text-[#07074D] dark:text-cyan-100"
-          >
-            Description
-          </label>
-          {% render_field form.description|add_class:"w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"%}
-        </div>
-        <div class="mb-5">
-          <label
-            for=""
-            class="mb-3 block text-base font-medium text-[#07074D] dark:text-cyan-100"
-          >
-            Dish Image
-          </label>
-          {% render_field form.dish_image|add_class:"block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"%}
-        </div>
-        <div class="mb-5">
-          <label
-            for=""
-            class="mb-3 block text-base font-medium text-[#07074D] dark:text-cyan-100"
-          >
-            Price
-          </label>
-          {% render_field form.price|add_class:"w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"%}
-        </div>
-        <div class="mb-5">
-          <label
-            for=""
-            class="mb-3 block text-base font-medium text-[#07074D] dark:text-cyan-100"
-          >
-            Category
-          </label>
-          {% render_field form.category|add_class:"w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"%}
-        </div>
-        <div class="mb-5">
-          <label
-            for=""
-            class="mb-3 block text-base font-medium text-[#07074D] dark:text-cyan-100"
-          >
-            Sub-Category
-          </label>
-          {% render_field form.sub_category|add_class:"w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"%}
-        </div>
-        <div class="mb-5">
-          <label
-            for=""
-            class="mb-3 block text-base font-medium text-[#07074D] dark:text-cyan-100"
-          >
-            Non-Veg
-          </label>
-          {% with input=form.is_non_veg %}
-            {% include 'menu/menu_partials/tab_card_partial.html#toggle-button'%}
-          {% endwith %}
-
-        </div>
-        <div>
-          <button
-            class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-base font-semibold text-white outline-none"
-          >
-            Submit
+    <h4 class="m-4 py-2 text-center text-xl font-medium text-[#033E3E] bg-[#38ACEC] rounded-xl border border-stone-500">
+              Create New Menu Item
+    </h4>
+    <div class="flex items-center justify-between py-12 dark:bg-gray-700 gap-4">
+      <div class="mx-auto flex flex-col justify-center gap-40">
+        
+        <div class="items-center text-center">
+          <button 
+            class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800 grid-rows-1"
+            hx-get="{% url 'menu-edit' %}" 
+            hx-target="#menu-input-page" 
+            hx-select="#menu-edit-filter-page"
+            hx-push-url="true"
+            hx-swap="outerHTML"
+            >
+            <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+              Go to Edit Page
+            </span>
           </button>
         </div>
-      </form>
-    </div>
-    
-    <div class="hidden" id="hidden">
-      <p id="food_subcat">{{food_subcat}}</p>
-      <p id="drinks_subcat">{{drinks_subcat}}</p>
-      <p id="dessert_subcat">{{dessert_subcat}}</p>
-    </div>
-  </div>
 
-  <script>
-          function previewImage() {
-              var input = document.getElementById('id_dish_image');
-              var preview = document.getElementById('preview_image');
-              var file = input.files[0];
-              
-              if (file) {
-                  var reader = new FileReader();
-                  reader.onload = function(e) {
-                    preview.src = e.target.result;
-                  };
+        <div class="mx-auto items-center text-center grid-rows-5">
+          <img id="preview_image" src="{% static 'images/dummy_image.png' %}" alt="{% static 'images/dummy_image.png' %}" class="w-96 mx-2">
+        </div>
 
-                  reader.readAsDataURL(file);
-              } else {
-                  preview.src = "{% static 'images/dummy_image.png' %}";
-              }
+        <div></div>
+        
+      </div>
+      <div class="mx-auto w-full max-w-[550px]">
+        <form action="" method="POST" enctype="multipart/form-data" 
+          class="mx-2" 
+          hx-boost="true" 
+          hx-target="#menu-input-page" 
+          hx-select="#menu-input-page" 
+          hx-swap="outerHTML"
+        >
+            {% csrf_token %}    
+          <div class="mb-5">
+            <label
+              for=""
+              class="mb-3 block text-base font-medium text-[#07074D] dark:text-cyan-100"
+            >
+              Title
+            </label>
+            {% render_field form.title|add_class:"w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"%}
+          </div>
+          <div class="mb-5">
+            <label
+              for=""
+              class="mb-3 block text-base font-medium text-[#07074D] dark:text-cyan-100"
+            >
+              Description
+            </label>
+            {% render_field form.description|add_class:"w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"%}
+          </div>
+          <div class="mb-5">
+            <label
+              for=""
+              class="mb-3 block text-base font-medium text-[#07074D] dark:text-cyan-100"
+            >
+              Dish Image
+            </label>
+            {% render_field form.dish_image|add_class:"block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"%}
+          </div>
+          <div class="mb-5">
+            <label
+              for=""
+              class="mb-3 block text-base font-medium text-[#07074D] dark:text-cyan-100"
+            >
+              Price
+            </label>
+            {% render_field form.price|add_class:"w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"%}
+          </div>
+          <div class="mb-5">
+            <label
+              for=""
+              class="mb-3 block text-base font-medium text-[#07074D] dark:text-cyan-100"
+            >
+              Category
+            </label>
+            {% render_field form.category|add_class:"w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"%}
+          </div>
+          <div class="mb-5">
+            <label
+              for=""
+              class="mb-3 block text-base font-medium text-[#07074D] dark:text-cyan-100"
+            >
+              Sub-Category
+            </label>
+            {% render_field form.sub_category|add_class:"w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"%}
+          </div>
+          <div class="mb-5">
+            <label
+              for=""
+              class="mb-3 block text-base font-medium text-[#07074D] dark:text-cyan-100"
+            >
+              Non-Veg
+            </label>
+            {% with input=form.is_non_veg %}
+              {% include 'menu/menu_partials/tab_card_partial.html#toggle-button'%}
+            {% endwith %}
+
+          </div>
+          <div>
+            <button
+              class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-base font-semibold text-white outline-none"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+      
+      <div class="hidden" id="hidden">
+        <p id="food_subcat">{{food_subcat}}</p>
+        <p id="drinks_subcat">{{drinks_subcat}}</p>
+        <p id="dessert_subcat">{{dessert_subcat}}</p>
+      </div>
+    </div>
+
+    <script>
+      input = document.getElementById('id_dish_image')
+      input.onchange = function previewImage() {
+          var input = document.getElementById('id_dish_image');
+          var preview = document.getElementById('preview_image');
+          var file = input.files[0];
+          
+          if (file) {
+              var reader = new FileReader();
+              reader.onload = function(e) {
+                preview.src = e.target.result;
+              };
+
+              reader.readAsDataURL(file);
+          } else {
+              preview.src = "{% static 'images/dummy_image.png' %}";
           }
-      </script>
-
+      }
+    </script>
+        
+    {% if request.htmx and originating_url != "url 'menu-add'" %}
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       {{ form.media.js }}
       <script type="py" src="{% static 'pyscript/menu_add.py' %}"></script>
-      
-      <!-- <script type="py">
-        from pyweb import pydom
-        from js import FileReader
+    {% endif %}
+        
+    <!-- <script type="py">
+      from pyweb import pydom
+      from js import FileReader
+
+      @when('change', '#id_dish_image')
+      def preview_img(event):
         input = pydom['#id_dish_image'][0]
-        preview = pydom['#preview_image'][0]
-        files = input._js.files
-
-        def preview_img(event):
-          preview.src = event.target.result
-
-        if files:
+        file = input._js.files.item(0)
+        
+        if file:
           reader = FileReader.new()
-          reader.onload = lambda event: preview_img(event)
-          reader.readAsDataURL([file[0] for file in files][0])
-      </script> -->
-
+          reader.onload = lambda event: view_img(event)
+          reader.readAsDataURL(file)
+          
+      def view_img(event):
+        preview = pydom['#preview_image'][0]
+        preview.src = event.target.result
+      
+    </script> -->
   </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  {{ form.media.js }}
+  <script type="py" src="{% static 'pyscript/menu_add.py' %}"></script>
+
 {% endblock content %}

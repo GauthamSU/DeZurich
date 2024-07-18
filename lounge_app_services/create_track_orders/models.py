@@ -55,3 +55,5 @@ class OrderItem(models.Model):
     def __str__(self):
         return self.product.title
 
+
+# class OrderItemCart(models.Model):
