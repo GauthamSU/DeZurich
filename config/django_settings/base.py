@@ -145,7 +145,7 @@ USE_TZ = True
 
 # STATIC_URL = 'static/'
 
-STATIC_URL = env('STATIC_URL')
+STATIC_URL = env.str('STATIC_URL', default='static/')
 
 STATICFILES_DIRS = [BASE_DIR / 'static/']
 
@@ -165,9 +165,9 @@ STATICFILES_FINDERS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_URL = env('MEDIA_URL')
+MEDIA_URL = env.str('MEDIA_URL', default='media/')
 
-MEDIA_ROOT = env('MEDIA_ROOT')
+MEDIA_ROOT = env.str('MEDIA_ROOT', default='media/')
 
 DJANGO_FLATPICKR = {"theme_name": "dark"}
 
