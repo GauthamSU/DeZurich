@@ -30,6 +30,7 @@ urlpatterns = [
     path('internal/menu/', include('lounge_app_services.menu.urls')),
     path('internal/order/', include('lounge_app_services.create_track_orders.urls')),
     path('internal/workspace/', include('lounge_app_services.workspace.urls')),
+    path('internal/management/', include('lounge_app_services.management_decisions.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

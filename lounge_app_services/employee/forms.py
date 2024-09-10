@@ -1,8 +1,17 @@
-from typing import Any, Optional
 from django import forms
 from .models import UserProfile, EmployeeLeave
-from django.forms.widgets import FileInput, RadioSelect
+from django.forms.widgets import FileInput
 from django_flatpickr.widgets import DatePickerInput
+from lounge_app_services.authentication.models import User
+from django_select2 import forms as s2forms
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'groups']
+        widgets = {
+            'groups': s2forms.Select2MultipleWidget()
+        }
 
 
 class ProfileForm(forms.ModelForm):
@@ -12,7 +21,8 @@ class ProfileForm(forms.ModelForm):
         self.fields['phone_number'].widget.attrs.update({'placeholder':'Mobile Number'})
         self.fields['city'].widget.attrs.update({'placeholder':'Ex: Bengaluru'})
         self.fields['zipcode'].widget.attrs.update({'placeholder':'Ex: 560056'})
-        
+        # self.fields['first_name'].initial = self.instance.user.first_name
+        # self.fields['last_name'].initial = self.instance.user.last_name
 
     class Meta:
         model = UserProfile

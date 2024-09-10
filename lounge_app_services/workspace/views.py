@@ -1,7 +1,8 @@
 from django.shortcuts import render
+from lounge_app_services.workspace.plotly_charts import leave_type_chart
 
-# Create your views here.
 def workspace_view(request):
-    response = render(request, 'workspace/workspace.html')
+    leave_plot = leave_type_chart(request)
+    response = render(request, 'workspace/workspace.html', context={'leave_plot':leave_plot})
     response['HX-Refresh'] = 'true'
     return response

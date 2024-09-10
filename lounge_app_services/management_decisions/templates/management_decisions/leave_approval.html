@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load partials %}
+
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div id="leave-approval-page" mx>
+    <h3 class="text-4xl text-center my-5">Leave approval</h3>
+
+    {% include 'management_decisions/partials/leave_list_table.html#leaves-table' %}
+
+</div>
+
+{% endblock %}

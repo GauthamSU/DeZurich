@@ -5,6 +5,9 @@
 {% load static %}
 
 {% block content %}
+    <head>
+    {{user_form.media.css}}
+    </head>
 
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -41,14 +44,14 @@
                                         <div class="flex justify-between md:col-span-5">
                                             <div class="md:col-span-2 px-1">
                                                 <label for="first_name">First Name</label>
-                                                {% render_field profile_form.first_name|add_class:input_class %}
+                                                {% render_field user_form.first_name|add_class:input_class %}
                             
                                                 <!-- <input type="text" name="first_name" id="first_name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="First Name"/> -->
                                             </div>
 
                                             <div class="md:col-span-2 px-1">
                                                 <label for="last_name">Last Name</label>
-                                                {% render_field profile_form.last_name|add_class:input_class %}
+                                                {% render_field user_form.last_name|add_class:input_class %}
                                                 <!-- <input type="text" name="last_name" id="last_name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="Last Name"/> -->
                                             </div>
 
@@ -62,7 +65,7 @@
                                         
                                         <div class="md:col-span-2">
                                         <label for="group">Team</label>
-                                        {% render_field profile_form.group|add_class:input_class %} 
+                                        {% render_field user_form.groups|add_class:input_class %} 
                                         <!-- <input type="email" name="email" id="email" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="email@domain.com" /> -->
                                         </div>
                                         
@@ -136,4 +139,9 @@
           }
       }
     </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    {{ user_form.media.js }}
+
 {% endblock content %}

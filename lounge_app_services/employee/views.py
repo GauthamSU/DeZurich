@@ -1,12 +1,10 @@
 from datetime import timedelta
-from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from .forms import ProfileForm, ApplyLeaveForm
-
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
 from .models import EmployeeLeave
 from django_flatpickr.schemas import FlatpickrOptions
+from .forms import UserUpdateForm
 
 
 # To get a list of dates in string format between a date range.
@@ -17,20 +15,24 @@ def get_dates_between(start_date, end_date):
 
 
 
-
 @login_required(login_url='login')
 def user_profile(request):
-    profile = request.user.userprofile
+    user = request.user
+    profile = user.userprofile
     if request.method == 'POST':
         profile_form = ProfileForm(request.POST, request.FILES, instance=profile)
-        if profile_form.is_valid():
+        user_form = UserUpdateForm(request.POST, instance=user)
+        if profile_form.is_valid() and user_form.is_valid():
             profile_form.save()
+            user_form.save()
             return redirect('profile_card')
         else:
-            print(profile_form.errors)
+            print('Profile Errors : ', profile_form.errors)
+            print('User Errors : ', user_form.errors)
     else:
         profile_form = ProfileForm(instance=profile)
-    context = {'profile_form':profile_form}
+        user_form = UserUpdateForm(instance=user)
+    context = {'profile_form':profile_form, 'user_form': user_form}
     return render(request, 'employee/profile.html', context)
 
 
@@ -73,7 +75,7 @@ def apply_leave(request, pk=None):
             for leave in employee_leaves:
                 if leave != instance:
                     disable_dates += get_dates_between(leave.leave_start_date, leave.leave_end_date)
-            return_template = "employee\leave_partials\leave_application_form.html"
+            return_template = "employee\leave_partials\leave_application_form.html#leave-application-form"
         
         # Rendering raw leave application form with dates of previous submissions disabled
         else:

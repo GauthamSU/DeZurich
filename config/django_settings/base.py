@@ -27,9 +27,10 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
 AUTH_USER_MODEL = "authentication.User"
 # Application definition
 
-# AUTHENTICATION_BACKENDS = [
-#     'django.contrib.auth.backends.ModelBackend',
-# ]
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'guardian.backends.ObjectPermissionBackend',
+]
 
 LOGIN_URL = "login/"
 
@@ -55,6 +56,7 @@ INSTALLED_APPS = [
     'template_partials',
     'django_htmx',
     'django_select2',
+    'guardian',
         
     'lounge_app_services.custom_template_filters.apps.CustomTemplateFiltersConfig',
     'lounge_app_services.homepage.apps.HomepageConfig',
@@ -62,7 +64,8 @@ INSTALLED_APPS = [
     'lounge_app_services.menu.apps.MenuConfig',
     'lounge_app_services.create_track_orders.apps.CreateTrackOrdersConfig',
     'lounge_app_services.workspace.apps.WorkspaceConfig',
-    'lounge_app_services.authentication.apps.AuthenticationConfig'
+    'lounge_app_services.authentication.apps.AuthenticationConfig',
+    'lounge_app_services.management_decisions.apps.ManagementDecisionsConfig'
 ]
 
 MIDDLEWARE = [

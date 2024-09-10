@@ -21,6 +21,7 @@ def initiate_order(request):
                }
     
     if request.method == 'POST':
+        orderitem_list = []
         item_list = []
         category_list = []
         quantity_list = []
@@ -71,8 +72,9 @@ def initiate_order(request):
                 total_amount += item_order_price
                 
                 if not request.htmx:
-                    OrderItem.objects.create(order=order, product=menu_item, quantity=quantity, order_price=item_order_price, preference=preference)
-        
+                    orderitem = OrderItem.objects.create(order=order, product=menu_item, quantity=quantity, order_price=item_order_price, preference=preference)
+                    orderitem_list.append(orderitem)
+                    
         # Returns the ordered list for the preview
         if request.htmx and table_num > 0:
             context = {'data': list(zip(item_list, category_list, quantity_list, item_price_list, item_title_list, is_non_veg_list, preference_list, item_price_total_list)),
@@ -84,8 +86,12 @@ def initiate_order(request):
         
 
         if table_num > 0 and total_quantity > 0:
-            items_ordered = MenuItems.objects.filter(slug_title__in = item_list)
-            order.title.set(items_ordered)
+            # items_ordered = MenuItems.objects.filter(slug_title__in = item_list)
+            print(total_amount)
+            print(total_quantity)
+            order.title.set(orderitem_list)
+            # order.total_quantity = total_quantity
+            # order.order_total = total_amount
             order.save()
 
             messages.add_message(request, messages.INFO, order.order_id)
@@ -121,12 +127,9 @@ def order_filter_view(request, category):
     else:
         menu_items = MenuItems.objects.filter(category=category)
         order_filters = HookahOrderFilter(request.GET, queryset=menu_items)
-    # context = {'order_filter_queryset': order_filters.qs, 
-    #            'order_filter_form':order_filters.form,
-    #            'category': category,
-    #            'menu_items':menu_items}
+    
     excluded_queryset = menu_items.difference(order_filters.qs)    
     context = {'order_filter_queryset': list(order_filters.qs.values()),
                'excluded_queryset':list(excluded_queryset.values())}
-    # return render(request, 'create_track_orders/partials/create_order_partial.html#filtered-list-partial', context=context)
+    
     return JsonResponse(context, safe=False)

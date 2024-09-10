@@ -4,7 +4,7 @@ from .models import UserProfile
 
 def employee_profile(sender, instance, created, **kwargs):
     if created:
-        UserProfile.objects.create(user=instance)
-        print('Profile Created')
+        user_instance = UserProfile.objects.create(user=instance)
+        print(user_instance)
 
 post_save.connect(employee_profile, sender=get_user_model())

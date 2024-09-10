@@ -11,11 +11,11 @@ Belgian Chocolate,,dish_images\blue_lagoon_mojito.jpg,180,FALSE,DRINKS,Milkshake
 Oreo,,dish_images\blue_lagoon_mojito.jpg,160,FALSE,DRINKS,Milkshake
 Kitkat,,dish_images\blue_lagoon_mojito.jpg,180,FALSE,DRINKS,Milkshake
 Mixed Berry,,dish_images\blue_lagoon_mojito.jpg,160,FALSE,DRINKS,Milkshake
-Strawberry,,dish_images\blue_lagoon_mojito.jpg,140,FALSE,DRINKS,Milkshake
-Mango,,dish_images\blue_lagoon_mojito.jpg,140,FALSE,DRINKS,Milkshake
-Vanilla,,dish_images\blue_lagoon_mojito.jpg,140,FALSE,DRINKS,Milkshake
-Tender Coconut,,dish_images\blue_lagoon_mojito.jpg,140,FALSE,DRINKS,Milkshake
-Cold Coffee/Hazelnut/Irish,,dish_images\blue_lagoon_mojito.jpg,160,FALSE,DRINKS,Milkshake
+Strawberry Milkshake,,dish_images\blue_lagoon_mojito.jpg,140,FALSE,DRINKS,Milkshake
+Mango Milkshake,,dish_images\blue_lagoon_mojito.jpg,140,FALSE,DRINKS,Milkshake
+Vanilla Milkshake,,dish_images\blue_lagoon_mojito.jpg,140,FALSE,DRINKS,Milkshake
+Tender Coconut Milkshake,,dish_images\blue_lagoon_mojito.jpg,140,FALSE,DRINKS,Milkshake
+Cold Coffee/Hazelnut/Irish Milkshake,,dish_images\blue_lagoon_mojito.jpg,160,FALSE,DRINKS,Milkshake
 Hazelnut Frappuccino,,dish_images\blueberry-mocktail.jpg,250,FALSE,DRINKS,Frappuccino
 Choco Frappuccino,,dish_images\blueberry-mocktail.jpg,240,FALSE,DRINKS,Frappuccino
 Cold coffee Frappuccino,,dish_images\blueberry-mocktail.jpg,260,FALSE,DRINKS,Frappuccino
@@ -31,11 +31,11 @@ Mirinda,,dish_images\blueberry-mocktail.jpg,68,FALSE,DRINKS,Soft Drinks
 Thumbs Up,,dish_images\blueberry-mocktail.jpg,68,FALSE,DRINKS,Soft Drinks
 Redbull,,dish_images\blueberry-mocktail.jpg,180,FALSE,DRINKS,Soft Drinks
 Mineral water,,dish_images\blueberry-mocktail.jpg,40,FALSE,DRINKS,Soft Drinks
-Strawberry,,dish_images\blueberry-mocktail.jpg,99,FALSE,DESSERT,Ice Cream
-Vanilla,,dish_images\blueberry-mocktail.jpg,99,FALSE,DESSERT,Ice Cream
-Chocolate,,dish_images\blueberry-mocktail.jpg,99,FALSE,DESSERT,Ice Cream
-Mango,,dish_images\blueberry-mocktail.jpg,99,FALSE,DESSERT,Ice Cream
-Butterscotch,,dish_images\blueberry-mocktail.jpg,99,FALSE,DESSERT,Ice Cream
+Strawberry Scoop,,dish_images\blueberry-mocktail.jpg,99,FALSE,DESSERT,Ice Cream
+Vanilla Scoop,,dish_images\blueberry-mocktail.jpg,99,FALSE,DESSERT,Ice Cream
+Chocolate Scoop,,dish_images\blueberry-mocktail.jpg,99,FALSE,DESSERT,Ice Cream
+Mango Scoop,,dish_images\blueberry-mocktail.jpg,99,FALSE,DESSERT,Ice Cream
+Butterscotch Scoop,,dish_images\blueberry-mocktail.jpg,99,FALSE,DESSERT,Ice Cream
 Tea,,dish_images\blue_lagoon_mojito.jpg,43,FALSE,DRINKS,Hot Beverages
 Saffron Tea,,dish_images\blue_lagoon_mojito.jpg,60,FALSE,DRINKS,Hot Beverages
 Ginger Masala Tea,,dish_images\blue_lagoon_mojito.jpg,48,FALSE,DRINKS,Hot Beverages
@@ -50,18 +50,18 @@ Arabic Coffee (Kahwa),,dish_images\blue_lagoon_mojito.jpg,60,FALSE,DRINKS,Hot Be
 Belgian Hot Chocolate,,dish_images\blue_lagoon_mojito.jpg,180,FALSE,DRINKS,Hot Beverages
 Falvoured Hot Chocolate,,dish_images\blue_lagoon_mojito.jpg,200,FALSE,DRINKS,Hot Beverages
 Clear Soup,,dish_images\lime_mojito.jpg,180,FALSE,FOOD,Soup
-Clear Soup,,dish_images\lime_mojito.jpg,200,TRUE,FOOD,Soup
+Clear Soup (Chicken),,dish_images\lime_mojito.jpg,200,TRUE,FOOD,Soup
 Manchow Soup,,dish_images\lime_mojito.jpg,200,FALSE,FOOD,Soup
-Manchow Soup,,dish_images\lime_mojito.jpg,220,TRUE,FOOD,Soup
+Manchow Soup (Chicken),,dish_images\lime_mojito.jpg,220,TRUE,FOOD,Soup
 Hot and Sour Soup,,dish_images\lime_mojito.jpg,199,FALSE,FOOD,Soup
-Hot and Sour Soup,,dish_images\lime_mojito.jpg,219,TRUE,FOOD,Soup
+Hot and Sour Soup (Chicken),,dish_images\lime_mojito.jpg,219,TRUE,FOOD,Soup
 Cream of Broccoli and Almond Soup,,dish_images\lime_mojito.jpg,225,FALSE,FOOD,Soup
 Roasted Tomato and Bell Pepper Soup,,dish_images\lime_mojito.jpg,200,FALSE,FOOD,Soup
 Caesar Salad,,,180,FALSE,FOOD,Salad
-Caesar Salad,,,200,TRUE,FOOD,Salad
+Caesar Salad (Chicken),,,200,TRUE,FOOD,Salad
 Greek Salad,,,200,FALSE,FOOD,Salad
 CharGrilled Salad,,,200,FALSE,FOOD,Salad
-CharGrilled Salad,,,250,TRUE,FOOD,Salad
+CharGrilled Salad (Chicken),,,250,TRUE,FOOD,Salad
 Watermelon Feta Salad,,,200,FALSE,FOOD,Salad
 Avacado salad with Herbs Lettuce and Capers (Seasonal),,,260,FALSE,FOOD,Salad
 Veggie Baked Lasagna,,,325,FALSE,FOOD,Lasagna
@@ -73,7 +73,7 @@ Potato Wedges (Peri Peri),,dish_images\french_fries.jpg,180,FALSE,FOOD,Starters
 Hash Brown,,dish_images\french_fries.jpg,200,FALSE,FOOD,Starters
 Cheese Baked Nachos,,dish_images\french_fries.jpg,210,FALSE,FOOD,Starters
 Fully loaded Nachos,,dish_images\french_fries.jpg,220,FALSE,FOOD,Starters
-Fully loaded Nachos,,dish_images\french_fries.jpg,240,TRUE,FOOD,Starters
+Fully loaded Nachos (Chicken),,dish_images\french_fries.jpg,240,TRUE,FOOD,Starters
 Garlic Bread (Without cheese),,dish_images\french_fries.jpg,155,FALSE,FOOD,Starters
 Garlic Bread (With cheese),,dish_images\french_fries.jpg,205,FALSE,FOOD,Starters
 Bruschetta,,dish_images\french_fries.jpg,250,FALSE,FOOD,Starters
@@ -99,7 +99,7 @@ Cottage Cheese Burger,,,230,TRUE,FOOD,Burger
 BBQ Chicken Burger,,,250,TRUE,FOOD,Burger
 Crispy Chicken Burger,,,255,FALSE,FOOD,Burger
 American Cheese Burger,,,235,FALSE,FOOD,Burger
-American Cheese Burger,,,255,TRUE,FOOD,Burger
+American Cheese Burger (Chicken),,,255,TRUE,FOOD,Burger
 Signature Chicken Burger,,,277,TRUE,FOOD,Burger
 Roasted Lamb Burger,,,360,TRUE,FOOD,Burger
 Margherita Pizza,,,250,FALSE,FOOD,Pizza
@@ -113,7 +113,7 @@ Mushroom & Cheese Sandwich,,,199,FALSE,FOOD,Sandwich
 Avacado Egg Sandwich,,,225,FALSE,FOOD,Sandwich
 Grilled Cheese Chicken Salami Sandwich,,,240,TRUE,FOOD,Sandwich
 Club Sandwich,,,235,FALSE,FOOD,Sandwich
-Club Sandwich,,,260,TRUE,FOOD,Sandwich
+Club Sandwich (Chicken),,,260,TRUE,FOOD,Sandwich
 Grilled Chicken Steak,,,360,TRUE,FOOD,Grill
 Peri Peri Chicken Steak,,,375,TRUE,FOOD,Grill
 Lemon Saffron Marinated Grill Chicken,,,430,TRUE,FOOD,Grill

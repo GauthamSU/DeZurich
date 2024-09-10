@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% load partials %}
+
 {% load widget_tweaks %}
 
 {% block content %}
@@ -12,7 +14,7 @@
     </div>
 </a>
 
-{% include 'employee/leave_partials/leave_application_form.html' %}
+{% include 'employee/leave_partials/leave_application_form.html#leave-application-form' %}
 
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-6 my-4">
@@ -58,7 +60,7 @@
                     {{leave.leave_end_date}}
                 </td>
                 <td class="px-2 py-4">
-                    {{leave.date_difference.days|add:"1"}}
+                    {{leave.date_difference|add:"1"}}
                 </td>
                 <td class="px-2 py-4">
                     {% if leave.is_approved %}
@@ -78,6 +80,7 @@
                             hx-trigger="click" 
                             hx-headers='{ "X-CSRFToken": "{{ csrf_token }}" }' 
                             hx-target="#leave_application_form"
+                            hx-swap="outerHTML"
                             hx-push-url="true"
                             class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                         >

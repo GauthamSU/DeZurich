@@ -50,8 +50,6 @@ leave_choices = (('Sick', 'Sick'), ('Casual', 'Casual'), ('Closed', 'Closed'))
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=50, blank=True, null=True)
-    last_name = models.CharField(max_length=50, blank=True, null=True)
     profile_pic = models.ImageField(default='static/profile.png', null=True, blank=True, upload_to='profile_images')
     address = models.CharField(max_length=1000, blank=True, null=True)
     phone_number = PhoneNumberField(blank=True, region='IN', null=True)
@@ -59,16 +57,18 @@ class UserProfile(models.Model):
     state = models.CharField(choices=state_choices, default='Karnataka', max_length=50)
     gender = models.CharField(choices=gender_choices, max_length=50, blank=True, null=True)
     zipcode = models.IntegerField(blank=True, null=True)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE, blank=True, null=True)
-
+    
 
     @property
     def full_name(self):
         "Returns the person's full name."
-        return '%s %s' % (self.first_name, self.last_name)
+        return '%s %s' % (self.user.first_name, self.user.last_name)
     
     
     def __str__(self):
+        return self.user.username
+    
+    def __repr__(self):
         return f"{self.user.username}"
     
 
@@ -80,12 +80,17 @@ class EmployeeLeave(models.Model):
     leave_start_date = models.DateField()
     leave_end_date = models.DateField()
     is_approved = models.BooleanField(default=False)
+    revision = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return f"{self.employee} - {self.leave_type} Leave"
     
+    def __repr__(self):
+        return f"{self.employee}"
+        # return self.employee
+    
     def date_difference(self):
-        return self.leave_end_date - self.leave_start_date
+        return (self.leave_end_date - self.leave_start_date).days
     
     class Meta:
         ordering = ('leave_start_date',)
